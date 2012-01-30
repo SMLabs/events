@@ -46,11 +46,11 @@ class Module_Event extends Module {
 			'sections' => array(
 			    'events' => array(
 				    'name' => 'events_admin_section_title',
-				    'uri' => 'admin/event/main/',
+				    'uri' => 'admin/event',
 				    'shortcuts' => array(
 						array(
 							'name' => 'events_admin_section_title',
-							'uri' => 'admin/event/main/',
+							'uri' => 'admin/event/',
 							'class' => ''
 						),
 						array(
@@ -112,7 +112,7 @@ class Module_Event extends Module {
 		// Return a string containing help info
 		// You could include a file and return it here.
 		return "<h4>Overview</h4>
-		<p>Event management module.</p>";
+		<p>Help for Event Management.</p>";
 	}
 }
 /* End of file details.php */

@@ -43,6 +43,9 @@ class Admin extends Admin_Controller {
 			
 			$this->template
 				->append_metadata( css('event.css', $this->config->item('module_name')))
+				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('module_name')) )				
+				->append_metadata( js('jquery.simpletip-1.3.1.js', $this->config->item('module_name')) )
+				
 				->build('admin/main', $data);
 		}else {
 			$this->template->build('admin/access_failed');
@@ -56,11 +59,11 @@ class Admin extends Admin_Controller {
 				->append_metadata( css('event.css', $this->config->item('module_name')) )
 				->append_metadata( css('jquery-ui-1.8.17.custom/ui-darkness/jquery-ui-1.8.17.custom.css', $this->config->item('module_name')) )
 				->append_metadata( css('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.css', $this->config->item('module_name')) )
+				
+				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.js', $this->config->item('module_name')) )
-				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.js', $this->config->item('module_name')) )
-				
-				->append_metadata( js('jquery.simpletip-1.3.1.js', $this->config->item('module_name')) )
+				->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
 				
 				->build('admin/create');
 		
@@ -73,7 +76,7 @@ class Admin extends Admin_Controller {
 		if( $this->user_id != "" ) {		
 			$test_id = $this->event_model->SaveEvent( $_REQUEST ); 
 		
-			redirect(site_url('admin/' . $this->config->item('module_name') . '/main'));
+			redirect(site_url('admin/' . $this->config->item('module_name')));
 		}else {
 			$this->template->build('admin/access_failed');
 		}
@@ -92,6 +95,8 @@ class Admin extends Admin_Controller {
 				->append_metadata( css('event.css', $this->config->item('module_name')) )
 				->append_metadata( css('jquery-ui-1.8.17.custom/ui-darkness/jquery-ui-1.8.17.custom.css', $this->config->item('module_name')) )
 				->append_metadata( css('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.css', $this->config->item('module_name')) )
+				
+				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
@@ -105,7 +110,7 @@ class Admin extends Admin_Controller {
 		if( $this->user_id != "" ) {		
 			$action = $this->event_model->UpdateEvent( $_REQUEST ); 
 		
-			redirect(site_url('admin/' . $this->config->item('module_name') . '/main'));	
+			redirect(site_url('admin/' . $this->config->item('module_name')));
 		}else {
 			$this->template->build('admin/access_failed');
 		}
@@ -118,7 +123,7 @@ class Admin extends Admin_Controller {
 			
 			$this->event_model->DeleteEvent( $event_id ); 
 			
-			redirect(site_url('admin/' . $this->config->item('module_name') . '/main'));
+			redirect(site_url('admin/' . $this->config->item('module_name')));
 			
 		}else {
 			$this->template->build('admin/access_failed');
@@ -132,7 +137,7 @@ class Admin extends Admin_Controller {
 			
 			$this->event_model->UpdateEventStatus( $event_id ); 
 			
-			redirect(site_url('admin/' . $this->config->item('module_name') . '/main'));
+			redirect(site_url('admin/' . $this->config->item('module_name')));
 		}
 	}
 }

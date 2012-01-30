@@ -17,13 +17,19 @@ class Event extends Public_Controller
 	 * @return void
 	 */
 	public function index(){
-		$data["eventData"] = $this->event_model->FrontendDisplayEvents();
+	/*	$data["eventData"] = $this->event_model->FrontendDisplayEvents();
 		//print_r($data["eventData"]); exit;
+		$this->template->build( $this->config->item('module_name') . '/agenda', $data);*/
+		redirect(site_url($this->config->item('module_name') . '/agenda'));
+	}
+	
+	public function agenda(){
+		$data["eventData"] = $this->event_model->FrontendDisplayEvents();
 		$this->template->build( $this->config->item('module_name') . '/agenda', $data);
 	}
 	
-	public function month_view(){
-		//$data["eventData"] = $this->event_model->FrontendDisplayEvents();
+	
+	public function calendar(){
 			
 		$this->template
 			->append_metadata( css('event.css', $this->config->item('module_name')) )
