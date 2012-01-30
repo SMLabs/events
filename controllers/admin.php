@@ -49,7 +49,7 @@ class Admin extends Admin_Controller {
 		}
 	}
 	
-	function create_event(){
+	function create(){
 		if( $this->user_id != "" ) {
 			
 			$this->template			
@@ -69,18 +69,18 @@ class Admin extends Admin_Controller {
 		}
 	}
 	
-	function save_event(){
+	function save(){
 		if( $this->user_id != "" ) {		
 			$test_id = $this->event_model->SaveEvent( $_REQUEST ); 
 		
-			redirect(site_url('admin/' . $this->config->item('module_name')));	
+			redirect(site_url('admin/' . $this->config->item('module_name') . '/main'));
 		}else {
 			$this->template->build('admin/access_failed');
 		}
 	}
 	
 	
-	function edit_event( $encrypted_event_id ){
+	function edit( $encrypted_event_id ){
 		if( $this->user_id != "" ) {		
 		
 			$event_id = WsDecrypt( $encrypted_event_id );
@@ -101,40 +101,38 @@ class Admin extends Admin_Controller {
 		}
 	}
 	
-	function update_event(){
+	function update(){
 		if( $this->user_id != "" ) {		
 			$action = $this->event_model->UpdateEvent( $_REQUEST ); 
 		
-			redirect(site_url('admin/' . $this->config->item('module_name')));	
+			redirect(site_url('admin/' . $this->config->item('module_name') . '/main'));	
 		}else {
 			$this->template->build('admin/access_failed');
 		}
 	}
 	
-	function delete_event( $encrypted_event_id ){
+	function delete( $encrypted_event_id ){
 		if( $this->user_id != "" ) {		
 			
 			$event_id = WsDecrypt( $encrypted_event_id );			
 			
 			$this->event_model->DeleteEvent( $event_id ); 
 			
-			redirect(site_url('admin/' . $this->config->item('module_name')));	
-			
+			redirect(site_url('admin/' . $this->config->item('module_name') . '/main'));
 			
 		}else {
 			$this->template->build('admin/access_failed');
 		}
 	}
 	
-	function update_event_status( $encrypted_event_id ){
+	function update_status( $encrypted_event_id ){
 		if($this->user_id!="")
 		{
 			$event_id = WsDecrypt( $encrypted_event_id );
 			
 			$this->event_model->UpdateEventStatus( $event_id ); 
 			
-			redirect(site_url('admin/' . $this->config->item('module_name')));	
-					
+			redirect(site_url('admin/' . $this->config->item('module_name') . '/main'));
 		}
 	}
 }

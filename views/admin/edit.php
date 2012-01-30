@@ -19,7 +19,7 @@ jQuery(document).ready(function() {
 		ampm: true
 	});
 
-	 jQuery("#frm_update_event").validate();
+	 jQuery("#frmUpdate").validate();
 	
 });
 
@@ -54,7 +54,7 @@ input {
 
 </style>
 
-<form action="<?php echo site_url('admin/'.$this->config->item('module_name').'/update_event/'); ?>" method="post" name="frm_update_event" id="frm_update_event" >
+<form action="<?php echo site_url('admin/'.$this->config->item('module_name').'/update/'); ?>" method="post" name="frmUpdate" id="frmUpdate" >
 	<input type="hidden" name="id" id="id" value="<?php echo $event->id;?>"  />
 	<div> <span style="font-size:16px; font-weight:bold;">Edit Event</span><br />
     <div style="padding:20px;">

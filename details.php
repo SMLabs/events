@@ -46,16 +46,16 @@ class Module_Event extends Module {
 			'sections' => array(
 			    'events' => array(
 				    'name' => 'events_admin_section_title',
-				    'uri' => 'admin/event',
+				    'uri' => 'admin/event/main/',
 				    'shortcuts' => array(
 						array(
 							'name' => 'events_admin_section_title',
-							'uri' => 'admin/event/',
+							'uri' => 'admin/event/main/',
 							'class' => ''
 						),
 						array(
 							'name' => 'events_admin_shortcut_add',
-							'uri' => 'admin/event/create_event',
+							'uri' => 'admin/event/create',
 							'class' => 'add'
 						)
 					),
@@ -112,7 +112,7 @@ class Module_Event extends Module {
 		// Return a string containing help info
 		// You could include a file and return it here.
 		return "<h4>Overview</h4>
-		<p>This is event management module only for DCH.</p>";
+		<p>Event management module.</p>";
 	}
 }
 /* End of file details.php */

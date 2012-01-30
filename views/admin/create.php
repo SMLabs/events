@@ -19,7 +19,7 @@ jQuery(document).ready(function() {
 		ampm: true
 	});
 
-	 jQuery("#frm_create_event").validate();
+	 jQuery("#frmCreate").validate();
 });
 
 
@@ -54,7 +54,7 @@ input {
 
 </style>
 
-<form action="<?php echo site_url('admin/'.$this->config->item('module_name').'/save_event/'); ?>" method="post" name="frm_create_event" id="frm_create_event" >
+<form action="<?php echo site_url('admin/'.$this->config->item('module_name').'/save/'); ?>" method="post" name="frmCreate" id="frmCreate" >
 	
 	<div> <span style="font-size:16px; font-weight:bold;">Add New Event</span><br />
     <div style="padding:20px;">
