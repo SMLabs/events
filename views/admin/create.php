@@ -54,7 +54,7 @@ input {
 
 </style>
 
-<form action="<?php echo site_url('admin/'.$this->config->item('dch_event_module_name').'/save_event/'); ?>" method="post" name="frm_create_event" id="frm_create_event" >
+<form action="<?php echo site_url('admin/'.$this->config->item('module_name').'/save_event/'); ?>" method="post" name="frm_create_event" id="frm_create_event" >
 	
 	<div> <span style="font-size:16px; font-weight:bold;">Add New Event</span><br />
     <div style="padding:20px;">

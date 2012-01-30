@@ -94,7 +94,7 @@ class Admin extends Admin_Controller {
 				->append_metadata( css('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.css', $this->config->item('module_name')) )
 				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.js', $this->config->item('module_name')) )
-				->append_metadata( js('jquery.validate.js', $this->config->item('dch_event_module_name')) )
+				->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
 				->build('admin/edit', $data);
 		}else {
 			$this->template->build('admin/access_failed');

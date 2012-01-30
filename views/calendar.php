@@ -6,12 +6,13 @@
 		
 			editable: false,
 			
-			theme: true,
+			theme: false,
 			
 			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
+				left: 'title today',
+				/*center: 'title',*/
+				right: 'prev,next'
+				/*right: 'month,agendaWeek,agendaDay'*/
 			},
 			
 			events: "<?php echo site_url('event/event_calendar_data/'); ?>",
@@ -47,22 +48,22 @@
 		}
 
 	#calendar {
-		width: 900px;
-		margin: 0 auto;
+	/*	width: 900px;
+		margin: 0 auto; */
 		}
 		
-		html .fc a, .fc table { font-size:1em;
+		/*html .fc a, .fc table { font-size:1em;
 		}
 		
 		html .fc a, .fc table tr td a { font-size:1em;
-		}
+		}*/
 
 </style>
 
 <div class="views">Calender Month View</div>    
 <div class="buttons">
-    <div class="disable_btn"><a href="<?php echo site_url('event/'); ?>">Agenda View</a></div>
-    <div class="enable_btn"><a href="<?php echo site_url('event/month_view'); ?>">Month View</a></div>
+    <div class="disable_btn"><a href="<?php echo site_url($this->config->item('module_name') . '/agenda'); ?>">Agenda View</a></div>
+    <div class="enable_btn"><a href="<?php echo site_url($this->config->item('module_name') . '/calendar'); ?>">Month View</a></div>
 </div>
 <div class="seprator"></div>
 <div id='calendar'></div>

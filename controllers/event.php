@@ -7,7 +7,7 @@ class Event extends Public_Controller
 	{
 		parent::__construct();
 		
-		$this->config->set_item('dch_event_module_name', "event" );
+		$this->config->set_item('module_name', "event" );
 	}
 	
 	/**
@@ -19,23 +19,23 @@ class Event extends Public_Controller
 	public function index(){
 		$data["eventData"] = $this->event_model->FrontendDisplayEvents();
 		//print_r($data["eventData"]); exit;
-		$this->template->build('event', $data);
+		$this->template->build( $this->config->item('module_name') . '/agenda', $data);
 	}
 	
 	public function month_view(){
 		//$data["eventData"] = $this->event_model->FrontendDisplayEvents();
 			
 		$this->template
-			->append_metadata( css('event.css', $this->config->item('dch_event_module_name')) )
-			->append_metadata( css('fullcalendar/cupertino/theme.css', $this->config->item('dch_event_module_name')) )
-			->append_metadata( css('fullcalendar/fullcalendar.css', $this->config->item('dch_event_module_name')) )			
-			//->append_metadata( css('fullcalendar/fullcalendar.print.css', $this->config->item('dch_event_module_name')) )						
+			->append_metadata( css('event.css', $this->config->item('module_name')) )
+			->append_metadata( css('fullcalendar/cupertino/theme.css', $this->config->item('module_name')) )
+			->append_metadata( css('fullcalendar/fullcalendar.css', $this->config->item('module_name')) )			
+			//->append_metadata( css('fullcalendar/fullcalendar.print.css', $this->config->item('module_name')) )						
 			
-			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('dch_event_module_name')) )
-			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('dch_event_module_name')) )
-			->append_metadata( js('fullcalendar/fullcalendar.js', $this->config->item('dch_event_module_name')) )			
+			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('module_name')) )
+			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('module_name')) )
+			->append_metadata( js('fullcalendar/fullcalendar.js', $this->config->item('module_name')) )			
 			
-			->build('month_view');
+			->build($this->config->item('module_name') . '/calendar');
 	}
 	
 	public function event_calendar_data()
@@ -54,30 +54,6 @@ class Event extends Public_Controller
 		
 		echo json_encode($data["calendar"]);
 		
-		
-	///	echo json_encode($data["eventData"]);
-		
-		/*$year = date('Y');
-		$month = date('m');
-
-		echo json_encode(array(
-	
-			array(
-				'id' => 111,
-				'title' => "Event1",
-				'start' => "$year-$month-10",
-				'url' => "http://yahoo.com/"
-			),
-			
-			array(
-				'id' => 222,
-				'title' => "Event2",
-				'start' => "$year-$month-20",
-				'end' => "$year-$month-22",
-				'url' => "http://yahoo.com/"
-			)
-	
-		));	*/	
 	}
 
 }

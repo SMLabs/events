@@ -1,7 +1,7 @@
 <div class="views">Calender Agenda View</div>    
 <div class="buttons">
-    <div class="enable_btn"><a href="<?php echo site_url('event/agenda'); ?>">Agenda View</a></div>
-    <div class="disable_btn"><a href="<?php echo site_url('event/calendar'); ?>">Month View</a></div>
+    <div class="enable_btn"><a href="<?php echo site_url( $this->config->item('module_name') . '/agenda'); ?>">Agenda View</a></div>
+    <div class="disable_btn"><a href="<?php echo site_url( $this->config->item('module_name') . '/calendar'); ?>">Month View</a></div>
 </div>
 <div class="seprator"></div>
 <?php  if( !empty( $eventData ) ) {

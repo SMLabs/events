@@ -76,31 +76,6 @@ class event_model extends CI_Model {
 	}
 
 	
-	function GetEventScheduler( $event_id )
-	{
-		$this->db->select('*');
-		$this->db->from('dch_event_scheduler');
-		$this->db->where('event_id', $event_id );
-		$this->db->order_by("event_date", "asc"); 
-		$query = $this->db->get();
-		
-		return $query->result();
-			
-	}
-	
-	function GetEventDaysTime( $event_id, $event_date )
-	{
-		$this->db->select('*');
-		$this->db->from('dch_event_scheduler');
-		$this->db->where('event_id', $event_id );
-		$this->db->where('event_date', $event_date );
-		$query = $this->db->get();
-		
-		return $query->result();
-		
-	}
-	
-	
 	function GetEvent_ById( $event_id )
 	{
 		$this->db->select('*');
