@@ -113,4 +113,11 @@ class Event extends Public_Controller
 		echo $content; 
 		exit();
 	}
+	
+	public function details($id){
+		
+		$data =  $this->event_model->GetEvent_ById($id);
+	
+		$this->template->build($this->config->item('module_name') . '/details', $data[0]);
+	}
 }
