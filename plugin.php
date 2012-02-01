@@ -19,9 +19,7 @@ class Plugin_Event extends Plugin
 	 * @param int $limit : number to limit results to
 	 * @return string
 	 */
-	public function get(){
-		$page	= $this->pyrocache->model('page_m', 'get', array($id));
-		
+	public function get(){		
 		($this->attribute('from')) ? $this->db->where('events.event_date >', $this->attribute('from')) : null;
 		($this->attribute('to')) ? $this->db->where('events.event_date <', $this->attribute('to')) : null;
 		($this->attribute('limit')) ? $this->db->limit($this->attribute('limit')): null;
