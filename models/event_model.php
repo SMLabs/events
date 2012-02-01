@@ -21,7 +21,7 @@ class event_model extends CI_Model {
 		$this->db->set('facebook_event_url', $data['facebook_event_url'] ); 
 		$this->db->set('eventbrite_event_url', $data['eventbrite_event_url'] ); 
 		
-		$this->db->insert('dch_events'); 
+		$this->db->insert('events'); 
 		
 		return true;
 	}
@@ -40,7 +40,7 @@ class event_model extends CI_Model {
 		
 		$this->db->where('id', $data['id']  );
 		
-		$this->db->update('dch_events'); 
+		$this->db->update('events'); 
 		
 		
 		return true;	
@@ -49,7 +49,7 @@ class event_model extends CI_Model {
 	function DeleteEvent( $event_id )
 	{
 		$this->db->where('id', $event_id );
-		$this->db->delete("dch_events");
+		$this->db->delete("events");
 		
 		return true;
 	}
@@ -59,7 +59,7 @@ class event_model extends CI_Model {
 	{
 		$this->db->where('id',$event_id);
 		
-		$query=$this->db->get('dch_events');
+		$query=$this->db->get('events');
 		  
         $row = $query->result();
 		
@@ -70,7 +70,7 @@ class event_model extends CI_Model {
 		else
 			$this->db->set('status', "Active" );	 				   
 		
-		$this->db->update("dch_events");
+		$this->db->update("events");
 		
 		return true;
 	}
@@ -79,7 +79,7 @@ class event_model extends CI_Model {
 	function GetEvent_ById( $event_id )
 	{
 		$this->db->select('*');
-		$this->db->from('dch_events');
+		$this->db->from('events');
 		$this->db->where('id', $event_id );
 		$query = $this->db->get();
 		
@@ -90,7 +90,7 @@ class event_model extends CI_Model {
 	function ManageEvents( )
 	{
 		$this->db->select('*');
-		$this->db->from('dch_events');
+		$this->db->from('events');
 		$this->db->order_by("event_date", "asc"); 
 		$query = $this->db->get();
 		return  $query->result();
@@ -102,7 +102,7 @@ class event_model extends CI_Model {
 
 		$this->db->select('*');
 		
-		$this->db->from('dch_events');
+		$this->db->from('events');
 		
 		$this->db->order_by("event_date", "asc"); 
 		
@@ -117,7 +117,7 @@ class event_model extends CI_Model {
 	{
 		$this->db->select('count(*) as total_event_in_a_day, id, name, event_date, start_time, end_time');
 		
-		$this->db->from('dch_events');
+		$this->db->from('events');
 		
 		$this->db->group_by("event_date"); 
 		
