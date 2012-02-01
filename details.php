@@ -66,10 +66,10 @@ class Module_Event extends Module {
 
 	public function install()
 	{
-		$this->dbforge->drop_table('dch_events');
+		$this->dbforge->drop_table('events');
 
 		$dch_event = "
-			CREATE TABLE ".$this->db->dbprefix('dch_events')." (
+			CREATE TABLE ".$this->db->dbprefix('events')." (
 				`id` bigint(20) NOT NULL AUTO_INCREMENT,
 				`name` varchar(255) NOT NULL,
 				`description` LONGTEXT NOT NULL,
@@ -94,7 +94,7 @@ class Module_Event extends Module {
 
 	public function uninstall()
 	{
-		if($this->dbforge->drop_table('dch_events'))
+		if($this->dbforge->drop_table('events'))
 		{
 			return TRUE;
 		}
