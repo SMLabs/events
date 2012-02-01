@@ -113,6 +113,25 @@ class event_model extends CI_Model {
 		return  $query->result();
 	}	
 	
+	function EventDetailByDate( $date )
+	{
+		$this->db->select('*');
+		
+		$this->db->from('dch_events');
+		
+		$this->db->order_by("event_date", "asc"); 
+		
+		$this->db->where('event_date', date("Y-m-d", strtotime($date)) );
+		
+		$this->db->where('status', "Active" );
+		
+		$query = $this->db->get();
+		
+		return  $query->result();
+		
+	}
+	
+	
 	function EventCalendarData( )
 	{
 		$this->db->select('count(*) as total_event_in_a_day, id, name, event_date, start_time, end_time');

@@ -30,3 +30,4 @@
     </article>
 </div>
 <?php } }?>
+<div class="seprator"></div>
