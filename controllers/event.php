@@ -44,12 +44,10 @@ class Event extends Public_Controller
 			->build($this->config->item('module_name') . '/calendar');
 	}
 	
-	public function event_calendar_data()
-	{
+	public function event_calendar_data(){
 		$data["eventData"] = $this->event_model->EventCalendarData();
 		///print_r($data["eventData"]); exit;
-		foreach( $data["eventData"] as $keys => $event )
-		{
+		foreach( $data["eventData"] as $keys => $event ){
 			$data['calendar'][$keys]['id'] = $event->id;	
 			$data['calendar'][$keys]['title'] = "AGENDA";
 			$data['calendar'][$keys]['start'] = date("Y-m-d", strtotime($event->event_date));	
@@ -60,6 +58,13 @@ class Event extends Public_Controller
 		
 		echo json_encode($data["calendar"]);
 		
+	}
+	
+	public function details($id){
+		
+		$data =  $this->event_model->GetEvent_ById($id);
+	
+		$this->template->build($this->config->item('module_name') . '/details', $data[0]);
 	}
 
 }

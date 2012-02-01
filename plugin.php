@@ -20,7 +20,6 @@ class Plugin_Event extends Plugin
 	 * @return string
 	 */
 	public function get(){
-		$id		= $this->attribute('id');
 		$page	= $this->pyrocache->model('page_m', 'get', array($id));
 		
 		($this->attribute('from')) ? $this->db->where('events.event_date >', $this->attribute('from')) : null;
@@ -34,6 +33,7 @@ class Plugin_Event extends Plugin
 		
 		foreach($result as $row){
 			$data[]=array(
+				'id'=>$row['id'],
 				'name'=>$row['name'],
 				'timestamp'=>strtotime($row['event_date']),
 				'date'=>$row['event_date'],
