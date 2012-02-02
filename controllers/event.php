@@ -6,6 +6,7 @@ class Event extends Public_Controller
 	public function __construct(){
 		parent::__construct();
 		$this->config->set_item('module_name', "event" );	
+		$this->template->set('section','Events');
 	}
 	
 	/**

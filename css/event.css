@@ -147,7 +147,7 @@ padding:10px 6px; 9px;
 }
 .pre_month_link a:link{
 	background:url(../img/cal_right_arrow.jpg) no-repeat center;
-	display:block;	
+	display:block;
 }
 
 .next_month_link{
@@ -160,6 +160,7 @@ padding:10px 6px; 9px;
 	background:url(../img/cal_left_arrow.jpg) no-repeat center;
 	display:block;
 }
+
 .calendar-head{
 	padding-top:14px;
 }
@@ -171,6 +172,7 @@ padding:10px 6px; 9px;
 .calendar-day-head-row {
 	padding:20px;
 }
+
 .calendar-day-head-row td{
 	font-size: 14px;
    	padding-top: 8px;		

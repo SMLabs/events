@@ -1,9 +1,9 @@
-<div class="views">Calender Agenda View</div>    
-<div class="buttons">
-    <div class="enable_btn"><a href="<?php echo site_url( $this->config->item('module_name') . '/agenda'); ?>">Agenda View</a></div>
-    <div class="disable_btn"><a href="<?php echo site_url( $this->config->item('module_name') . '/calendar'); ?>">Month View</a></div>
+<h1>
+Calender <strong>Agenda View</strong>
+<div class="cal-options">
+	<a class="cal-button" href="<?php echo site_url($this->config->item('module_name') . '/calendar'); ?>"><span>Calendar View</span></a>
 </div>
-<div class="seprator"></div>
+</h1>
 <?php  if( !empty( $eventData ) ) {
 			foreach( $eventData as $keys => $event ) { 	?>
 <div class="postings">
