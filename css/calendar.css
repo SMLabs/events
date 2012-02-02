@@ -97,6 +97,7 @@ a.cal-button:hover span{
 }
 
 .cal-top-month{
+	float:left;
 	font-size:17pt;
 	color:#7B858E;
 }
