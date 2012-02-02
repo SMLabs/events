@@ -1,51 +1,57 @@
-$(document).ready(function() {
-  
-  $('.calendar-day-head-row').find('td:last').css("border-right","1px solid #C8DEE7");
-  
-  $('.calendar-body').find('tr:last').prev('tr').find('td').css("border-bottom","1px solid #C8DEE7");
-  
-  $('.calendar-row').find('td:last').css("border-right","1px solid #C8DEE7");
-  
-  $('.calendar-event-title').parents().filter('.calendar-day').css({backgroundColor:'#7AABCB', color:'#FFF'});
-  
-  $('.calendar-day-np').css({backgroundColor:'#F4F4F4', color:'#F4F4F4'});
-  
-  $('.calender-today-col').css({backgroundColor:'#EAF7FF', color:'#A6CCE3'});
-  
- 
-  
-  
-});
 
-function ShowEventDetail( eventDate, obj, row_counter )
-{
-	if($('#event_detail_block_' + row_counter).is(':hidden'))
-	{
-		jQuery.ajax({
-			type : "POST",
-			url  : 'event/detail_by_event_date/',
-			data : 'event_date=' + eventDate,
-			//dataType: "json",
-			success : 
-			function(html)
-			{
-				$(obj).parents().filter('.calendar-row').find('td').css("border-bottom","1px solid #C8DEE7");
-				$(obj).parents().filter('.calendar-day').css({backgroundColor:'#286CAB', color:'#FFF', border:'1px solid #286CAB'});
+(function($){
+	$(document).ready(function() {
+		$('.cal-event-link').click(function(e){
+			e.preventDefault();			
+			
+			var el = $(this);
+			
+			if(!el.parents().filter('.cal-day').hasClass('cal-active-day')){
+			
+				$.ajax({
+					type : "GET",
+					url  : el.attr('href'),
+					success :function(html){
+					
+						// close the last open agenda
+						var last = $('.cal-active-day');
+						$('.cal-open-agenda').removeClass('cal-open-agenda').slideUp();
+						
+						// hide arrow
+						last.find('.cal-event-arrow span').slideUp(function(){
+							last.removeClass('cal-active-day');
+							last.find('.cal-event-link span').html('SHOW<strong>AGENDA</strong>');
+						});
+						
+						// set clicked day to active
+						el.parents().filter('.cal-day').addClass('cal-active-day');
+						el.find('span').html('HIDE<strong>AGENDA</strong>');
+						
+						var container = el.parents().filter('tr').next().find('.cal-agenda-container');
+						container.find('.cal-agenda-wrapper').html(html);
+						container.addClass('cal-open-agenda').slideDown(function(){
+							// scroll to the element the open agenda
+							$(document.body).animate({'scrollTop': el.offset().top});
+						});
+						
+						// show arrow
+						el.next().find('span').slideDown();
+					}
+				});
+			}else{
 				
-				$(obj).html('HIDE');
+				// close the last open agenda
+				var last = $('.cal-active-day');
+				$('.cal-open-agenda').removeClass('cal-open-agenda').slideUp();
 				
-				$('#detail_open_arrow_' + eventDate).show();
-				$('#event_detail_block_' + row_counter).find('td').html(html);
-				$('#event_detail_block_' + row_counter).fadeIn('slow');
+				// hide arrow
+				last.find('.cal-event-arrow span').slideUp(function(){
+					last.find('.cal-event-link span').html('SHOW<strong>AGENDA</strong>');
+					last.removeClass('cal-active-day');
+				});
 			}
-		}); 
-	}
-	else
-	{
-		$('#event_detail_block_' + row_counter).fadeOut('slow');
-		$(obj).html('SHOW');
-		$(obj).parents().filter('.calendar-day').css({backgroundColor:'#7AABCB', color:'#FFF', border:'1px solid #C8DEE7'});
-		$('#detail_open_arrow_' + eventDate).hide();
-		
-	}
-}
+			
+			
+		});
+	});
+})(jQuery);

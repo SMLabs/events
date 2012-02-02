@@ -158,21 +158,18 @@ padding:10px 6px; 9px;
 }
 .next_month_link a:link{
 	background:url(../img/cal_left_arrow.jpg) no-repeat center;
-	display:block;	
+	display:block;
 }
-
 .calendar-head{
-	padding-top:14px;	
+	padding-top:14px;
 }
-
 .calendar-body{
 	padding-top:1px;
 	padding-bottom: 55px;
-    width: 100%;		
+    width: 100%;
 }
-
 .calendar-day-head-row {
-	padding:20px;	
+	padding:20px;
 }
 .calendar-day-head-row td{
 	font-size: 14px;
@@ -189,7 +186,6 @@ padding:10px 6px; 9px;
 	font-weight:bold;
 	text-align:center;
 }
-
 td.calendar-day, td.calendar-day-np { 
 	font-size: 14px;
    	padding-top: 8px;		
@@ -202,21 +198,21 @@ td.calendar-day, td.calendar-day-np {
 	text-align:center;
 }
 
-div.day-number	 { 
+div.day-number{ 
 	
     font-size: 18px;
     font-weight: 600;
     position: relative;
     top: -4px;
 	text-align:left;
-	left:3px;	
-	
+	left:3px;
 }
 
-.ws_t_event_in_day {
+.cal-event-count{
     background-color: #D50100;
-    border: 2px solid #FFFFFF;
+    border: 3px solid #FFFFFF;
     border-radius: 16px 16px 16px 16px;
+	box-shadow:0px 5px 10px -5px rgba(0,0,0,1);
     bottom: 46px;
     color: #FFFFFF;
     float: right;

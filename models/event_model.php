@@ -2,7 +2,8 @@
 
 class event_model extends CI_Model {
 
-
+	private $tablename = "events";
+	
     function __construct()
     {
         // Call the Model constructor
@@ -21,7 +22,7 @@ class event_model extends CI_Model {
 		$this->db->set('facebook_event_url', $data['facebook_event_url'] ); 
 		$this->db->set('eventbrite_event_url', $data['eventbrite_event_url'] ); 
 		
-		$this->db->insert('events'); 
+		$this->db->insert($this->tablename); 
 		
 		return true;
 	}
@@ -40,7 +41,7 @@ class event_model extends CI_Model {
 		
 		$this->db->where('id', $data['id']  );
 		
-		$this->db->update('events'); 
+		$this->db->update($this->tablename); 
 		
 		
 		return true;	
@@ -79,7 +80,7 @@ class event_model extends CI_Model {
 	function GetEvent_ById( $event_id )
 	{
 		$this->db->select('*');
-		$this->db->from('events');
+		$this->db->from($this->tablename);
 		$this->db->where('id', $event_id );
 		$query = $this->db->get();
 		
@@ -90,7 +91,7 @@ class event_model extends CI_Model {
 	function ManageEvents( )
 	{
 		$this->db->select('*');
-		$this->db->from('events');
+		$this->db->from($this->tablename);
 		$this->db->order_by("event_date", "asc"); 
 		$query = $this->db->get();
 		return  $query->result();
@@ -102,7 +103,7 @@ class event_model extends CI_Model {
 
 		$this->db->select('*');
 		
-		$this->db->from('events');
+		$this->db->from($this->tablename);
 		
 		$this->db->order_by("event_date", "asc"); 
 		
@@ -117,7 +118,7 @@ class event_model extends CI_Model {
 	{
 		$this->db->select('*');
 		
-		$this->db->from('dch_events');
+		$this->db->from($this->tablename);
 		
 		$this->db->order_by("event_date", "asc"); 
 		
@@ -132,17 +133,22 @@ class event_model extends CI_Model {
 	}
 	
 	
-	function EventCalendarData( )
-	{
-		$this->db->select('count(*) as total_event_in_a_day, id, name, event_date, start_time, end_time');
+	function EventCalendarData($from=null,$to=null){
+		$this->db->select('count(*) as day_count, id, name, event_date, start_time, end_time');
 		
-		$this->db->from('events');
+		$this->db->from($this->tablename);
 		
-		$this->db->group_by("event_date"); 
+		$this->db->group_by("event_date");
 		
 		$this->db->order_by("event_date", "asc"); 
 		
 		$this->db->where('status', "Active" );
+		
+		if(isset($from) AND isset($to))
+			$this->db->where(array(
+				'event_date >'=>date('Y-m-d', strtotime($from)),
+				'event_date <'=>date('Y-m-d', strtotime($to))
+			));
 		
 		$query = $this->db->get();
 		

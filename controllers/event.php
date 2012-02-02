@@ -3,11 +3,9 @@
 class Event extends Public_Controller
 {
 	
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
-		
-		$this->config->set_item('module_name', "event" );
+		$this->config->set_item('module_name', "event" );	
 	}
 	
 	/**
@@ -17,9 +15,6 @@ class Event extends Public_Controller
 	 * @return void
 	 */
 	public function index(){
-	/*	$data["eventData"] = $this->event_model->FrontendDisplayEvents();
-		//print_r($data["eventData"]); exit;
-		$this->template->build( $this->config->item('module_name') . '/agenda', $data);*/
 		redirect(site_url($this->config->item('module_name') . '/agenda'));
 	}
 	
@@ -29,95 +24,75 @@ class Event extends Public_Controller
 	}
 	
 	
-	public function calendar( $month = "", $year="" ) {
-			
+	public function calendar( $month = false, $year = false ){
+		
+		!$month ? $month =date('m',now()) : null;
+		!$year ? $year = date('Y',now()) : null;
+		
 		$data["new_month"] = $month;
 		$data["new_year"] = $year;
 		
-		$data["eventData"] = $this->event_model->EventCalendarData();
+		$from = date('Y-m-d',strtotime($year.'-'.(int)$month.'-00'));
+		$to = date('Y-m-d',strtotime($year.'-'.((int)$month+1).'-01'));
+				
+		$data["eventData"] = $this->event_model->EventCalendarData($from,$to);
 		
-		foreach( $data["eventData"] as $keys => $event )
-		{
-			$data['events'][$keys]['id'] = $event->id;	
-			$data['events'][$keys]['title'] = "AGENDA";
-			$data['events'][$keys]['start'] = date("Y-m-d", strtotime($event->event_date));	
-			$data['events'][$keys]['url'] = "";	
-			$data['events'][$keys]['total_event_in_a_day'] = $event->total_event_in_a_day;	
-			$data['events'][$keys]['Intday'] = date("d", strtotime($event->event_date));
-			$data['events'][$keys]['event_date'] = date("Y-n-j", strtotime($event->event_date));			
+		foreach( $data["eventData"] as $keys => $event ){
+			// use the 2 diget day value as array index to simplify
+			$day = date('j',strtotime($event->event_date));
+			
+			$data['events'][$day]['id'] = $event->id;
+			$data['events'][$day]['start'] = date("Y-m-d", strtotime($event->event_date));
+			$data['events'][$day]['day_count'] = $event->day_count;
+			$data['events'][$day]['Intday'] = date("d", strtotime($event->event_date));
+			$data['events'][$day]['event_date'] = date("Y-n-j", strtotime($event->event_date));
+			$data['events'][$day]['url'] = base_url().'event/get_agenda/'.$data['events'][$day]['event_date'];
 		}
 		
+		/* days and weeks vars now ... */
+		$data['running_day'] = date('w',mktime(0,0,0,(int)$month,1,$year));
+		$data['days_in_month'] = date('t',mktime(0,0,0,$month,1,$year));
+		$data['days_in_this_week'] = 1;
+		$data['day_counter'] = 0;
+		$data['dates_array'] = array();
+		
+		/* build the view */
 		$this->template
-			->append_metadata( css('event.css', $this->config->item('module_name')) )
-			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('module_name')) )
-			->append_metadata( js('calendar.js', $this->config->item('module_name')) )
-			->build($this->config->item('module_name') . '/calendar', $data);		
+			//->append_metadata(css('event.css', $this->config->item('module_name')))
+			->append_metadata(css('calendar.css', $this->config->item('module_name')))
+			->append_metadata(js('calendar.js', $this->config->item('module_name')))
+			->build($this->config->item('module_name') . '/calendar', $data);
 	}
 	
-	
-	public function event_calendar_data()
-	{
+	public function event_calendar_data(){
 		$data["eventData"] = $this->event_model->EventCalendarData();
 		
-		foreach( $data["eventData"] as $keys => $event )
-		{
+		foreach( $data["eventData"] as $keys => $event ){
 			$data['calendar'][$keys]['id'] = $event->id;	
 			$data['calendar'][$keys]['title'] = "AGENDA";
 			$data['calendar'][$keys]['start'] = date("Y-m-d", strtotime($event->event_date));	
 			$data['calendar'][$keys]['url'] = "";	
 			$data['calendar'][$keys]['total_event_in_a_day'] = $event->total_event_in_a_day;	
 			$data['calendar'][$keys]['Intday'] = date("d", strtotime($event->event_date));
-			$data['calendar'][$keys]['event_date'] = date("Y-m-d", strtotime($event->event_date));			
+			$data['calendar'][$keys]['event_date'] = date("Y-m-d", strtotime($event->event_date));
 		}
-		
+				
 		echo json_encode($data["calendar"]);
 		
 	}
 	
-	function detail_by_event_date()
-	{
-		
-		extract($_POST);
-		$content= '';
-		
-		$eventData = $this->event_model->EventDetailByDate( $event_date );
+	public function get_agenda($date){
 			
-		if( !empty( $eventData ) ) {
-			foreach( $eventData as $keys => $event ) { 	
-	$content.='<div class="postings">
-					<div class="a_date">
-						<div class="a_date_text">
-							<div class="day">'. date('l',strtotime($event->event_date)).'</div>
-							<div class="month">'.date('F d,Y',strtotime($event->event_date)).'</div>
-							<div class="time">'.Time24hFormat_Into_AMPMTime($event->start_time).' - '. Time24hFormat_Into_AMPMTime($event->end_time).'</div>
-						</div>
-					</div>
-						
-					<article class="a_detail">
-						<header><h2 class="posting_hdr">'.$event->name.' </h2></header>
-						<p>
-							'.$event->description .' 
-							<div class="a_detail_text01">Sponsors</div>
-							<div class="a_detail_text02">'.$event->sponsors.'</div>
-							<div class="a_detail_text01">View Event on:</div>
-							<div class="a_detail_btn">
-								<a href="'.CheckHTTP_InURL($event->eventbrite_event_url).'"><div class="orange_btn">Eventbrite</div></a>
-								<a href="'.CheckHTTP_InURL($event->facebook_event_url).'"><div class="facebook_btn">facebook</div></a>
-							</div>
-						</p>
-					</article>
-            	</div>';
-			} 
-		}
+		$data['events'] = $this->event_model->EventDetailByDate($date);
 		
-		echo $content; 
-		exit();
+		($this->input->is_ajax_request()) ? $this->load->view($this->config->item('module_name') . '/details', $data) : $this->template->build($this->config->item('module_name') . '/details', $data);
+		
 	}
 	
 	public function details($id){
 		
-		$data =  $this->event_model->GetEvent_ById($id);
+		$data['events'] =  $this->event_model->GetEvent_ById($id);
 	
-		$this->template->build($this->config->item('module_name') . '/details', $data[0]);
+		$this->template->build($this->config->item('module_name') . '/details', $data);
 	}
 }

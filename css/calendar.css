@@ -1,0 +1,240 @@
+.cal-month-nav{
+	float:right;
+}
+
+.cal-head{
+	padding-top:14px;
+    width: 100%;
+}
+
+.cal-head-days td{	
+	font-size: 14px;
+   	padding-top: 8px;		
+	width:120px; 
+	padding:5px 12px 5px 5px; 
+	
+	border-top:1px solid #C8DEE7;	
+	border-left:1px solid #C8DEE7;	
+	border-bottom: 3px solid #76A9CA;	
+	background-color: #FFFFFF;
+	height: 42px;
+	color: #7AADCA;
+	font-weight:bold;
+	text-align:center;
+}
+
+.cal-body{
+    width: 100%;
+    margin-bottom:0px;
+	border-bottom:1px solid #C8DEE7;
+}
+
+td.sat{
+	border-right:1px solid #C8DEE7;
+}
+
+/** Top **/
+.cal-options{
+	float:right;
+}
+
+a.cal-button span{
+	padding:12px 10px 12px 35px;
+	border:1px solid #dbeaf3;
+	background:url(../img/disable_bullet.jpg) 8px center  no-repeat #FFF;
+	color:#a6cbe2;
+	float:left;
+	margin:0px;
+	font-weight:600;
+	font-size:11pt;
+}
+
+a.cal-button:hover span{
+	border:1px solid #dbeaf3;
+	background:url(../img/enable_bullet.jpg) 8px center  no-repeat #FFF;
+	color:#3A7EB7;
+}
+
+.cal-month-nav-pre{
+	display:block;
+	float:left;
+	width:30px;
+	height:30px;
+	padding-right:10px;
+}
+
+.cal-month-nav-pre a:link{
+	background:url(../img/cal_right_arrow.jpg) no-repeat center;
+	display:block;
+}
+
+.cal-month-nav-pre a span{
+	display:block;
+	width:30px;
+	height:30px;
+	overflow:hidden;
+	text-indent:-999%;
+}
+
+.cal-month-nav-next{
+	display:block;
+	float:right;
+	width:30px;
+	height:30px;
+}
+
+.cal-month-nav-next a:link{
+	background:url(../img/cal_left_arrow.jpg) no-repeat center;
+	display:block;
+}
+
+.cal-month-nav-next a span{
+	display:block;
+	width:30px;
+	height:30px;
+	overflow:hidden;
+	text-indent:-999%;
+}
+
+.cal-top-month{
+	font-size:17pt;
+	color:#7B858E;
+}
+
+a.calendar-top-today{
+	background:#FFF;
+	color:#3A7EB7;
+	border:1px solid #3A7EB7;
+	font-size:11pt;
+	padding:5px;
+	margin-left:10px;
+}
+
+a.calendar-top-today.disabled{
+	background:#FFF;
+	color:#ddeaf3;
+	border:1px solid #ddeaf3;
+}
+
+a.calendar-top-today span{
+}
+
+/** Days **/
+.cal-day{
+	font-size: 14px;
+   	padding: 0;
+	width:120px;
+	border-top:1px solid #C8DEE7;
+	border-left:1px solid #C8DEE7;
+	background-color: #FFFFFF;
+	color:#A6CCE3;
+	font-weight:600;
+	text-align:center;
+}
+
+.cal-day-box{
+	padding:8px;
+}
+.cal-day-wrapper{
+	position:relative;
+	height:113px;
+}
+
+.cal-day.events{
+	color:#fff;
+	background-color:#7cacca;
+}
+
+.cal-day.events a{
+	color:#fff;
+}
+
+.cal-day.today{
+	background-color:#eaf7ff;
+	color:#A6CCE3;
+}
+
+.cal-day.today a{
+	color:#A6CCE3;
+}
+
+.cal-day.cal-numless{
+	background-color:#FAFAFA;
+}
+
+.cal-day.cal-active-day .cal-day-box{
+	background-color:#286CAB;
+	color:#FFF;
+	z-index:999;
+	margin:-1px !important;
+	border:1px solid #286CAB;
+}
+
+.cal-day.cal-active-day a{
+	color:#FFF;
+}
+
+.day-number{
+	font-size: 18px;
+	font-weight: 600;
+	position: relative;
+	top: -4px;
+	text-align:left;
+	left:3px;
+}
+.cal-event-count{
+    background-color: #D50100;
+    border: 3px solid #FFFFFF;
+    border-radius: 16px 16px 16px 16px;
+	box-shadow:0px 5px 10px -5px rgba(0,0,0,1);
+    bottom: 46px;
+    color: #FFFFFF;
+    float: right;
+    font-weight: bold;
+    height: 20px;
+    left: 15px;
+    position: relative;
+    text-align: center;
+    width: 20px;
+}
+.cal-event-link{
+	display:block;
+	height:113px;
+	width:120px;
+	position:absolute;
+	left:0;
+	top:0;
+}
+.cal-event-link span{
+	padding:75px 10px 10px 10px;
+	display:block;
+	text-align:left;
+}
+.cal-event-link span strong{
+	display:block;
+}
+
+/** Agenda **/
+.cal-event-arrow{
+	height: 7px;
+	position:absolute;
+	bottom:-15px;
+	width: 100%;
+}
+
+.cal-event-arrow span{
+	display:block;
+	height:7px;
+	width:100%;
+	background:transparent url("../img/down_arrow.png") no-repeat center bottom;
+}
+
+.cal-agenda{
+	padding:0;
+}
+
+.cal-agenda-wrapper{
+	border-top:1px solid #C8DEE7;
+	padding:25px 0;
+	overflow:hidden;
+}
