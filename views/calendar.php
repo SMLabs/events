@@ -79,6 +79,7 @@ Calender <strong>Month View</strong>
 <?php 	endfor;?>
 <?php endif;?>
 		</tr>
+		<tr><td  class="cal-agenda" colspan="7"><div class="cal-agenda-container" style="display:none;"><div class="cal-agenda-wrapper">&nbsp;&nbsp;</div></div></td></tr>
 	</table>
 	
 </div>
