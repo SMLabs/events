@@ -79,17 +79,17 @@ input {
         </div> 
         
         <div><label>Sponsors:</label>&nbsp;
-            <input type="text" name="sponsors" id="sponsors"  class="required"  />
+            <input type="text" name="sponsors" id="sponsors"  class=""  />
     	</div>
         
 		<div>
             <label>URL for Facebook event:</label>&nbsp;
-            <input type="text" name="facebook_event_url" id="facebook_event_url"  class="required"  />
+            <input type="text" name="facebook_event_url" id="facebook_event_url"  class=""  />
     	</div>
         
 		<div>
             <label>URL for Eventbrite event:</label>&nbsp;
-            <input type="text" name="eventbrite_event_url" id="eventbrite_event_url"  class="required"  />
+            <input type="text" name="eventbrite_event_url" id="eventbrite_event_url"  class=""  />
     	</div>
         
 		<div>
