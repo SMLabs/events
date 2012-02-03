@@ -239,3 +239,7 @@ a.calendar-top-today span{
 	padding:25px 0;
 	overflow:hidden;
 }
+
+.cal-top {
+	height:35px; position:relative; top:5px;
+}
