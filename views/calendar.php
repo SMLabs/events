@@ -83,4 +83,3 @@ Calender <strong>Month View</strong>
 	</table>
 	
 </div>
-<div class='seprator'></div>

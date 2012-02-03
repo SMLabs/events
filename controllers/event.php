@@ -94,6 +94,6 @@ class Event extends Public_Controller
 		
 		$data['events'] =  $this->event_model->GetEvent_ById($id);
 	
-		$this->template->build($this->config->item('module_name') . '/details', $data);
+		($this->input->is_ajax_request()) ? $this->load->view($this->config->item('module_name') . '/details', $data) : $this->template->build($this->config->item('module_name') . '/details', $data);
 	}
 }

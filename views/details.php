@@ -1,8 +1,6 @@
 <?php
-
 	$total = count($events);
 	$index = 0;
-
 ?>
 <?php foreach( $events as $keys => $event ):?>
 				<div class="postings<?=(++$index==$total)?' last':''?>">
