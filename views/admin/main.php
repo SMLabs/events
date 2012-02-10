@@ -51,7 +51,7 @@
 	        <td align="center"><?php echo WsStringFormat($event->eventbrite_event_url,0,20) ;?></td>
 	        <td align="center">
 	            <?php echo anchor(site_url('admin/'.$this->config->item('module_name').'/edit/'. WsEncrypt( $event->id )),'Edit',array('class' => 'edit btn green')) ?>&nbsp;
-                <a href="javascript: void(0);" <?php echo '" onclick="javascript:if(confirm(\'Are you sure you want to delete this event.\')){ document.location.href = \''.site_url('admin/'.$this->config->item('module_name').'/delete/'. WsEncrypt( $event->id )).'\';}else{return false;}" ' ?> title="Delete Test" class="confirm btn red delete">Delete</a>&nbsp;
+                <a href="javascript: void(0);" <?php echo '" onclick="javascript:if(confirm(\'Are you sure you want to delete this event.\')){ document.location.href = \''.site_url('admin/'.$this->config->item('module_name').'/delete/'. WsEncrypt( $event->id )).'\';}else{return false;}" ' ?> title="Delete Test" class="btn red delete">Delete</a>&nbsp;
 				<?php echo anchor(site_url('admin/'.$this->config->item('module_name').'/update_status/'. WsEncrypt( $event->id )),$status_link_label,array('class' => 'btn orange edit')) ?>
 	        </td>
 	    </tr>
