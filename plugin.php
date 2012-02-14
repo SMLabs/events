@@ -19,8 +19,8 @@ class Plugin_Event extends Plugin
 	 * @param int $limit : number to limit results to
 	 * @return string
 	 */
-	public function get(){		
-		($this->attribute('from')) ? $this->db->where('events.event_date >', $this->attribute('from')) : null;
+	public function get(){
+		($this->attribute('from')) ? $this->db->where('events.event_date >', date('Y-m-d',(is_numeric($this->attribute('from')))?$this->attribute('from'):strtotime($this->attribute('from')))) : null;
 		($this->attribute('to')) ? $this->db->where('events.event_date <', $this->attribute('to')) : null;
 		($this->attribute('limit')) ? $this->db->limit($this->attribute('limit')): null;
 		$result = $this->db->where('status','Active')
