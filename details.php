@@ -67,15 +67,11 @@ class Module_Event extends Module {
 	public function install()
 	{
 		$this->dbforge->drop_table('events');
-
-		$dch_event = "
+		$event = "
 			CREATE TABLE ".$this->db->dbprefix('events')." (
 				`id` bigint(20) NOT NULL AUTO_INCREMENT,
 				`name` varchar(255) NOT NULL,
 				`description` LONGTEXT NOT NULL,
-				`sponsors` VARCHAR( 255 ) NOT NULL,
-				`facebook_event_url` VARCHAR( 255 ) NOT NULL,
-				`eventbrite_event_url` VARCHAR( 255 ) NOT NULL,
 				`start_time` TIME NOT NULL,
 				`end_time` TIME NOT NULL,
 				`event_date` DATETIME NOT NULL,
@@ -85,8 +81,34 @@ class Module_Event extends Module {
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		";
+		
+		$this->dbforge->drop_table('events_links');
+		$links = "
+			CREATE TABLE ".$this->db->dbprefix('events_links')." (
+				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+				`event_id` BIGINT(20) NOT NULL,
+				`url` LONGTEXT NOT NULL DEFAULT '',
+				`type` ENUM('default','facebook','eventbright','mailchimp','googleplus','twitter','pintrest','pdf','svpply','yelp','foursquare','gowalla') NOT NULL DEFAULT 'default',
+				`custom_type` VARCHAR(255) NOT NULL DEFAULT '',
+				PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8
+		";
+		
+		
+		$this->dbforge->drop_table('events_sponsors');
+		$sponsors = "
+			CREATE TABLE ".$this->db->dbprefix('events_sponsors')." (
+				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+				`event_id` BIGINT(20) NOT NULL,
+				`name` VARCHAR(255) NOT NULL DEFAULT,
+				`description` LONGTEXT NOT NULL DEFAULT '',
+				`url` VARCHAR(255) NOT NULL DEFAULT DEFAULT '',
+				`order` TINYINT(5) NOT NULL,
+				PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8
+		";
 
-		if($this->db->query($dch_event))
+		if($this->db->query($event) && $this->db->query($links))
 		{
 			return TRUE;
 		}
