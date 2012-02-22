@@ -78,6 +78,7 @@ class Module_Event extends Module {
 				`status` enum('Active','Deactive') NOT NULL DEFAULT 'Active',
 				`created_on` TIMESTAMP NOT NULL,
 				`modified_on` DATE NULL,
+				`contact` VARCHAR(255) NOT NULL,
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		";
@@ -87,7 +88,7 @@ class Module_Event extends Module {
 			CREATE TABLE ".$this->db->dbprefix('events_links')." (
 				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 				`event_id` BIGINT(20) NOT NULL,
-				`url` LONGTEXT NOT NULL DEFAULT '',
+				`url` VARCHAR(255) NOT NULL DEFAULT '',
 				`type` ENUM('default','facebook','eventbright','mailchimp','googleplus','twitter','pintrest','pdf','svpply','yelp','foursquare','gowalla') NOT NULL DEFAULT 'default',
 				`custom_type` VARCHAR(255) NOT NULL DEFAULT '',
 				PRIMARY KEY (`id`)
@@ -116,7 +117,7 @@ class Module_Event extends Module {
 
 	public function uninstall()
 	{
-		if($this->dbforge->drop_table('events'))
+		if($this->dbforge->drop_table('events') && $this->dbforge->drop_table('events_links') && $this->dbforge->drop_table('events_sponsors') )
 		{
 			return TRUE;
 		}
