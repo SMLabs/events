@@ -43,8 +43,6 @@ class Admin extends Admin_Controller {
 			
 			$this->template
 				->append_metadata( css('event.css', $this->config->item('module_name')))
-				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('module_name')) )				
-				->append_metadata( js('jquery.simpletip-1.3.1.js', $this->config->item('module_name')) )
 				
 				->build('admin/main', $data);
 		}else {
@@ -59,11 +57,11 @@ class Admin extends Admin_Controller {
 				->append_metadata( css('event.css', $this->config->item('module_name')) )
 				->append_metadata( css('jquery-ui-1.8.17.custom/ui-darkness/jquery-ui-1.8.17.custom.css', $this->config->item('module_name')) )
 				->append_metadata( css('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.css', $this->config->item('module_name')) )
-				
-				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.js', $this->config->item('module_name')) )
 				->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
+				
+				->append_metadata( $this->load->view('fragments/wysiwyg', $this->data, TRUE) )
 				
 				->build('admin/create');
 		
