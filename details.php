@@ -76,9 +76,10 @@ class Module_Event extends Module {
 				`end_time` TIME NOT NULL,
 				`event_date` DATETIME NOT NULL,
 				`status` enum('Active','Deactive') NOT NULL DEFAULT 'Active',
+				`contact` VARCHAR(255) NOT NULL,
+				`location` VARCHAR(255) NOT NULL,
 				`created_on` TIMESTAMP NOT NULL,
 				`modified_on` DATE NULL,
-				`contact` VARCHAR(255) NOT NULL,
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		";
@@ -89,8 +90,11 @@ class Module_Event extends Module {
 				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 				`event_id` BIGINT(20) NOT NULL,
 				`url` VARCHAR(255) NOT NULL DEFAULT '',
+				`text` VARCHAR(255) NOT NULL DEFAULT '',
 				`type` ENUM('default','facebook','eventbrite','mailchimp','googleplus','twitter','pinterest','pdf','svpply','yelp','foursquare','gowalla') NOT NULL DEFAULT 'default',
 				`order` tinyint(5) NOT NULL,
+				`created_on` TIMESTAMP NOT NULL,
+				`modified_on` DATE NULL,
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		";
@@ -104,6 +108,8 @@ class Module_Event extends Module {
 				`name` VARCHAR(255) NOT NULL DEFAULT,
 				`url` VARCHAR(255) NOT NULL DEFAULT DEFAULT '',
 				`order` TINYINT(5) NOT NULL,
+				`created_on` TIMESTAMP NOT NULL,
+				`modified_on` DATE NULL,
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		";
