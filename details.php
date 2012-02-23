@@ -89,8 +89,8 @@ class Module_Event extends Module {
 				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 				`event_id` BIGINT(20) NOT NULL,
 				`url` VARCHAR(255) NOT NULL DEFAULT '',
-				`type` ENUM('default','facebook','eventbright','mailchimp','googleplus','twitter','pintrest','pdf','svpply','yelp','foursquare','gowalla') NOT NULL DEFAULT 'default',
-				`custom_type` VARCHAR(255) NOT NULL DEFAULT '',
+				`type` ENUM('default','facebook','eventbrite','mailchimp','googleplus','twitter','pinterest','pdf','svpply','yelp','foursquare','gowalla') NOT NULL DEFAULT 'default',
+				`order` tinyint(5) NOT NULL,
 				PRIMARY KEY (`id`)
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		";
@@ -102,7 +102,6 @@ class Module_Event extends Module {
 				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 				`event_id` BIGINT(20) NOT NULL,
 				`name` VARCHAR(255) NOT NULL DEFAULT,
-				`description` LONGTEXT NOT NULL DEFAULT '',
 				`url` VARCHAR(255) NOT NULL DEFAULT DEFAULT '',
 				`order` TINYINT(5) NOT NULL,
 				PRIMARY KEY (`id`)
