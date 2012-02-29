@@ -54,7 +54,6 @@ class Admin extends Admin_Controller {
 		
 		$data['sponsors'] = array();
 		$data['links'] = array();
-		
 		$this->template
 			->append_metadata( css('event.css', $this->config->item('module_name')) )
 			->append_metadata( css('jquery-ui-1.8.17.custom/ui-darkness/jquery-ui-1.8.17.custom.css', $this->config->item('module_name')) )
@@ -98,7 +97,7 @@ class Admin extends Admin_Controller {
 		if($newsponsors = $this->input->post('newsponsors')){
 			$inserts = array();
 			foreach($newsponsors as $index=>$sponsor){
-				if(!$sponsor['delete']){
+				if(!$sponsor['delete'] && $sponsor['name']!=''){
 					$sponsor['event_id'] = $event_id;
 					unset($sponsor['delete']);
 					$inserts[] = $sponsor;
@@ -111,7 +110,7 @@ class Admin extends Admin_Controller {
 		if($newlinks = $this->input->post('newlinks')){
 			$inserts = array();
 			foreach($newlinks as $index=>$link){
-				if(!$link['delete']){
+				if(!$link['delete'] && $link['text']!='' && $link['url']!=''){
 					$link['event_id'] = $event_id;
 					unset($link['delete']);
 					$inserts[] = $link;
@@ -131,7 +130,7 @@ class Admin extends Admin_Controller {
 					$this->event_model->delete_sponsor($sponsor['id']);
 					continue;
 				}
-				$this->event_model->update_sponsor($sponsor);
+				($sponsor['text']!='') ? $this->event_model->update_sponsor($sponsor) : null;
 			}
 		}
 		
@@ -141,7 +140,7 @@ class Admin extends Admin_Controller {
 					$this->event_model->delete_link($link['id']);
 					continue;
 				}
-				$this->event_model->update_link($link);
+				($link['text']!='' || $link['url']!='') ? $this->event_model->update_link($link) : null;
 			}
 		}
 		
@@ -219,9 +218,8 @@ class Admin extends Admin_Controller {
 		redirect(site_url('admin/' . $this->config->item('module_name')).'/edit/'.$event_id);
 	}
 	
-	function delete( $encrypted_event_id ){
-		$event_id = WsDecrypt( $encrypted_event_id );
-		$this->event_model->DeleteEvent( $event_id );
+	function delete( $event_id ){
+		$this->event_model->delete_event( $event_id );
 		redirect(site_url('admin/' . $this->config->item('module_name')));
 	}
 	

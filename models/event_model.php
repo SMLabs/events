@@ -103,7 +103,7 @@ class event_model extends CI_Model {
 			if($this->db->insert($this->sponsors,$data)) return $this->db->insert_id();
 		}else{		
 			// batch insert
-			if($this->db->insert_batch($this->sponsors,$data)) return $this->db->insert_id();
+			if($this->db->insert_batch($this->sponsors,$data)) return true;
 		}
 		
 		return false;

@@ -11,7 +11,7 @@
 			<ul class="one_half">
 				<li>
 					<label>Title <small>The title of the event.</small></label>
-					<div class="input type-text"><input type="text" name="name" id="name"  class="required" value="<?=$event->name?>" /></div>
+					<div class="input type-text"><input type="text" name="name" id="name"  class="required" value="<?=isset($event)?$event->name:null?>" /></div>
 				</li>
 				<!-- this stuff doesn't have front-end integration -->
 				<!-- 
@@ -28,17 +28,17 @@
 			<ul class="one_half">
 				<li>
 					<label for="event_date">Date <small>The date this event will occur.</small></label>
-					<div class="input type-text"><input type="text" id="event_date" name="event_date" value="<?=DateTime_24hFormat_Into_AMPM_Date_SlashFormat($event->event_date)?>" class="required" /></div>
+					<div class="input type-text"><input type="text" id="event_date" name="event_date" value="<?=isset($event)?DateTime_24hFormat_Into_AMPM_Date_SlashFormat($event->event_date):null?>" class="required" /></div>
 				</li>
 				
 				<li>
 					<label for="start_time">Start Time <small>The time at which your event begins.</small></label>
-					<div class="input type-text"><input type="text" id="start_time" name="start_time" value="<?=Time24hFormat_Into_AMPMTime($event->start_time)?>" /></div>     
+					<div class="input type-text"><input type="text" id="start_time" name="start_time" value="<?=isset($event)?Time24hFormat_Into_AMPMTime($event->start_time):null?>" /></div>     
 				</li>
 
 				<li>
 					<label for="end_time">End Time <small>The time at which your event ends and people should start leaving.</small></label>
-					<div class="input type-text"><input type="text" id="end_time" name="end_time" value="<?=Time24hFormat_Into_AMPMTime($event->end_time)?>" /></div>
+					<div class="input type-text"><input type="text" id="end_time" name="end_time" value="<?=isset($event)?Time24hFormat_Into_AMPMTime($event->end_time):null?>" /></div>
 				</li>
 			</ul>
 		</div>
@@ -49,7 +49,7 @@
 		<div class="form_inputs ui-tabs-panel ui-corner-bottom">
 			<ul>
 				<li>
-					<textarea class="wysiwyg-simple" id="description" name="description" cols="50" rows="10"><?=$event->description?></textarea>
+					<textarea class="wysiwyg-simple" id="description" name="description" cols="50" rows="10"><?=isset($event)?$event->description:null?></textarea>
 				</li>
 			</ul>
 		</div>
