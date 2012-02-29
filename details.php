@@ -105,8 +105,8 @@ class Module_Event extends Module {
 			CREATE TABLE ".$this->db->dbprefix('events_sponsors')." (
 				`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 				`event_id` BIGINT(20) NOT NULL,
-				`name` VARCHAR(255) NOT NULL DEFAULT,
-				`url` VARCHAR(255) NOT NULL DEFAULT DEFAULT '',
+				`name` VARCHAR(255) NOT NULL DEFAULT '',
+				`url` VARCHAR(255) NOT NULL DEFAULT '',
 				`order` TINYINT(5) NOT NULL,
 				`created_on` TIMESTAMP NOT NULL,
 				`modified_on` DATE NULL,
@@ -114,7 +114,7 @@ class Module_Event extends Module {
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8
 		";
 
-		if($this->db->query($event) && $this->db->query($links))
+		if($this->db->query($event) && $this->db->query($links) && $this->db->query($sponsors))
 		{
 			return TRUE;
 		}

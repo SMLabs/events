@@ -32,13 +32,13 @@
 			$(this).removeClass('red');
 			$(this).addClass('gray');
 			$(this).find('span').text('Undelete');
-			item.find('div.actions input[name*="delete"]').val('true');
+			item.find('td.actions input[name*="[delete]"]').val(1);
 		}else{
 			item.removeClass('deleted');
 			$(this).removeClass('gray');
 			$(this).addClass('red');
 			$(this).find('span').text('Delete');
-			item.find('input[name*="delete"]').val('false');
+			item.find('input[name*="[delete]"]').val(0);
 		}
 	});
 
@@ -48,16 +48,15 @@
 		
 		var index = $('tr.sponsor.new').length;
 		
-		$('tbody.sponsors').append('\
-							<tr class="sponsor new">\
-								<td class="name"><div class="input type-text"><input type="text" name="newsponsors['+index+'][\'name\']" value=""/></div></td>\
-								<td class="url"><div class="input type-text"><input type="text" name="newsponsors['+index+'][\'url\']" value="" /> <a href="javascript:void(0)" target="_blank" class="btn green testlink"><span>Test</span></a></div></td>\
-								<td class="actions">\
-									<input type="hidden" value="newsponsors['+index+'][\'order\']" value="'+$('tr.sponsor').length+'"/>\
-									<input type="hidden" value="newsponsors['+index+'][\'delete\']" value="false"/>\
-									<button class="btn red delete"><span>Delete</span></button>\
-								</td>\
-							</tr>');
+		$('<tr id="newsponsor_'+index+'" class="sponsor new">\
+			<td class="name"><div class="input type-text"><input type="text" name="newsponsors['+index+'][name]" value=""/></div></td>\
+			<td class="url"><div class="input type-text"><input type="text" name="newsponsors['+index+'][url]" value="" /> <a href="javascript:void(0)" target="_blank" class="btn green testlink"><span>Test</span></a></div></td>\
+			<td class="actions">\
+				<input type="hidden" name="newsponsors['+index+'][order]" value="'+$('tr.sponsor').length+'"/>\
+				<input type="hidden" name="newsponsors['+index+'][delete]" value="0"/>\
+				<button class="btn red delete"><span>Delete</span></button>\
+			</td>\
+		</tr>').appendTo($('tbody.sponsors'));
 	});
 
 	// Links
@@ -83,41 +82,40 @@
 
 	// Add
 	$('tfoot.links .add').click(function(e){
+	
 		e.preventDefault();
+		var index = $('tr.link.new').length;
 		
-		var index = $('tr.newlink.new').length;
-		
-		$('tbody.links').append('\
-							<tr class="entry">\
-								<td class="title">\
-									<div class="input type-text"><input type="text" name="link['+index+'][\'title\']" value=""/></div>\
-								</td>\
-								<td class="url">\
-									<div class="input type-text"><input type="text" name="link['+index+'][\'url\']" value=""/> <a href="javascript:void(0)" target="_blank" class="btn green test"><span>Test</span></a></div>\
-								</td>\
-								<td class="type">\
-									<div class="input type-select">\
-										<select name="link['+index+'][\'type\']" class="chzn">\
-											<option value="default" selected="selected">Normal Link</option>\
-											<option value="facebook">Facebook</option>\
-											<option value="eventbrite">Eventbrite</option>\
-											<option value="mailchimp">Mail Chimp</option>\
-											<option value="googleplus">Google+</option>\
-											<option value="twitter">Twitter</option>\
-											<option value="pdf">PDF Downlaod</option>\
-											<option value="svpply">Svpply</option>\
-											<option value="yelp">Yelp</option>\
-											<option value="foursquare">Foursquare</option>\
-											<option value="gowalla">Gowalla</option>\
-										</select>\
-									</div>\
-									<input type="hidden" value="link['+index+'][\'order\']" value="'+index+'"/>\
-									<input type="hidden" value="link['+index+'][\'delete\']" value="false"/>\
-								</td>\
-								<td class="actions">\
-									<button class="btn red delete"><span>Delete</span></button>\
-								</td>\
-							</tr>');
+		$('<tr id="newlink_'+index+'" class="link new">\
+			<td class="title">\
+				<div class="input type-text"><input type="text" name="newlinks['+index+'][text]" value=""/></div>\
+			</td>\
+			<td class="url">\
+				<div class="input type-text"><input type="text" name="newlinks['+index+'][url]" value=""/> <a href="javascript:void(0)" target="_blank" class="btn green test"><span>Test</span></a></div>\
+			</td>\
+			<td class="type">\
+				<div class="input type-select">\
+					<select name="newlinks['+index+'][type]" class="chzn">\
+						<option value="default" selected="selected">Normal Link</option>\
+						<option value="facebook">Facebook</option>\
+						<option value="eventbrite">Eventbrite</option>\
+						<option value="mailchimp">Mail Chimp</option>\
+						<option value="googleplus">Google+</option>\
+						<option value="twitter">Twitter</option>\
+						<option value="pdf">PDF Downlaod</option>\
+						<option value="svpply">Svpply</option>\
+						<option value="yelp">Yelp</option>\
+						<option value="foursquare">Foursquare</option>\
+						<option value="gowalla">Gowalla</option>\
+					</select>\
+				</div>\
+				<input type="hidden" name="newlinks['+index+'][order]" value="'+index+'"/>\
+				<input type="hidden" name="newlinks['+index+'][delete]" value="0"/>\
+			</td>\
+			<td class="actions">\
+				<button class="btn red delete"><span>Delete</span></button>\
+			</td>\
+		</tr>').appendTo($('tbody.links'));
 	});
 
 });})(jQuery);

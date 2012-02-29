@@ -55,7 +55,7 @@ class Admin extends Admin_Controller {
 		$data['sponsors'] = array();
 		$data['links'] = array();
 		
-		$this->template			
+		$this->template
 			->append_metadata( css('event.css', $this->config->item('module_name')) )
 			->append_metadata( css('jquery-ui-1.8.17.custom/ui-darkness/jquery-ui-1.8.17.custom.css', $this->config->item('module_name')) )
 			->append_metadata( css('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.css', $this->config->item('module_name')) )
@@ -70,33 +70,152 @@ class Admin extends Admin_Controller {
 			->build('admin/form',$data);
 	}
 	
-	function save(){
-	
-		$event_id = $this->event_model->SaveEvent( $_REQUEST ); 
-		redirect(site_url('admin/' . $this->config->item('module_name')).'edit/'.$event_id);
+	function save($event_id=null){
+		
+		$event = array(
+			'name'=>$this->input->post('name'),
+			'event_date'=>$this->input->post('event_date'),
+			'start_time'=>$this->input->post('start_time'),
+			'end_time'=>$this->input->post('end_time'),
+			'description'=>$this->input->post('description'),
+			'contact'=>$this->input->post('contact'),
+			'location'=>$this->input->post('location')
+		);
+				
+		// insert/update event
+		if($event_id==null){
+			$event_id = $this->event_model->insert_event($event);
+		}else{
+			$event['id'] = $event_id;
+			$this->event_model->update_event($event);
+		}
+		
+		//////////////////////
+		// Insert New Stuff //
+		//////////////////////
+		
+		
+		if($newsponsors = $this->input->post('newsponsors')){
+			$inserts = array();
+			foreach($newsponsors as $index=>$sponsor){
+				if(!$sponsor['delete']){
+					$sponsor['event_id'] = $event_id;
+					unset($sponsor['delete']);
+					$inserts[] = $sponsor;
+				}
+			}
+			if(count($inserts)>0)$this->event_model->insert_sponsor($inserts,true);
+		}
+		
+		
+		if($newlinks = $this->input->post('newlinks')){
+			$inserts = array();
+			foreach($newlinks as $index=>$link){
+				if(!$link['delete']){
+					$link['event_id'] = $event_id;
+					unset($link['delete']);
+					$inserts[] = $link;
+				}
+			}
+			if(count($inserts)>0)$this->event_model->insert_link($inserts,true);
+		}
+		
+		
+		//////////////////////
+		// Update Old Stuff //
+		//////////////////////
+		
+		if($sponsors = $this->input->post('sponsors')){
+			foreach($sponsors as $index=>$sponsor){
+				if($sponsor['delete']){
+					$this->event_model->delete_sponsor($sponsor['id']);
+					continue;
+				}
+				$this->event_model->update_sponsor($sponsor);
+			}
+		}
+		
+		if($links = $this->input->post('links')){
+			foreach($links as $index=>$link){
+				if($link['delete']){
+					$this->event_model->delete_link($link['id']);
+					continue;
+				}
+				$this->event_model->update_link($link);
+			}
+		}
+		
+		// send user to edit page
+		redirect(site_url('admin/' . $this->config->item('module_name')).'/edit/'.$event_id);
 	}
 	
 	
-	function edit( $encrypted_event_id ){
-		$event_id = WsDecrypt( $encrypted_event_id );
-		
-		$data["details"] = $this->event_model->GetEvent_ById( $event_id )->row_array();
+	function edit($event_id){
+			
+		$data["event"] = $this->event_model->get_event($event_id)->row();
+		$data['sponsors'] = (array)$this->event_model->get_sponsors($event_id)->result();
+		$data['links'] = (array)$this->event_model->get_links($event_id)->result();
 		
 		$this->template
 			->append_metadata( css('event.css', $this->config->item('module_name')) )
 			->append_metadata( css('jquery-ui-1.8.17.custom/ui-darkness/jquery-ui-1.8.17.custom.css', $this->config->item('module_name')) )
 			->append_metadata( css('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.css', $this->config->item('module_name')) )
 			
-			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-1.7.1.min.js', $this->config->item('module_name')) )
 			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('module_name')) )
 			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.js', $this->config->item('module_name')) )
 			->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
+			->append_metadata( js('form.js', $this->config->item('module_name')) )
 			
-			->build('admin/form', $data);
+			->append_metadata( $this->load->view('fragments/wysiwyg', $this->data, TRUE) )
+			
+			->build('admin/form',$data);
 	}
 	
 	function update(){
-		$event_id = $this->event_model->UpdateEvent( $_REQUEST );
+		
+		$event = array(
+			'id'=>$this->input->post('event_id'),
+			'name'=>$this->input->post('name'),
+			'event_date'=>$this->input->post('event_date'),
+			'start_time'=>$this->input->post('start_time'),
+			'end_time'=>$this->input->post('end_time'),
+			'description'=>$this->input->post('description'),
+			'contact'=>'',
+			'location'=>''
+		);
+		
+		// Updates
+		$sponsors = $this->input->post('sponsors');
+		$links = $this->input->post('links');
+		
+		// New Inserts
+		$newsponsors = $this->input->post('newsponsors');
+		$newlinks = $this->input->post('newlinks');
+		
+		// update event
+		$event_id = $this->event_model->update_event($event);
+		
+		// insert sponsors
+		$inserts = array();
+		foreach($newsponsors as $index=>$sponsor){
+			if($sponsor['delete']=='true')continue;
+			$sponsor['event_id'] = $event_id;
+			unset($sponsor['delete']);
+			$inserts[] = $sponsor;
+		}
+		$this->event_model->insert_sponsor($inserts,true);
+		
+		// insert links
+		$inserts = array();
+		foreach($newlinks as $index=>$link){
+			if($link['delete']=='true')continue;
+			$link['event_id'] = $event_id;
+			unset($link['delete']);
+			$inserts[] = $link;
+		}
+		$this->event_model->insert_link($inserts,true);
+		
+		// send user to edit page
 		redirect(site_url('admin/' . $this->config->item('module_name')).'/edit/'.$event_id);
 	}
 	
