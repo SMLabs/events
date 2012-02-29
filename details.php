@@ -75,7 +75,7 @@ class Module_Event extends Module {
 				`start_time` TIME NOT NULL,
 				`end_time` TIME NOT NULL,
 				`event_date` DATETIME NOT NULL,
-				`status` enum('Active','Deactive') NOT NULL DEFAULT 'Active',
+				`status` enum('active','inactive') NOT NULL DEFAULT 'active',
 				`contact` VARCHAR(255) NOT NULL,
 				`location` VARCHAR(255) NOT NULL,
 				`created_on` TIMESTAMP NOT NULL,

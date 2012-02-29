@@ -74,20 +74,25 @@ class event_model extends CI_Model {
 	}
 	
 	
-	function get_events($from=false,$till=false,$ord="event_date",$dir="ASC",$offset='0',$limit="50")
+	function get_events($from=null,$till=null,$ord="event_date",$dir="ASC",$offset='0',$limit="9999")
 	{
 		// select my events
-		$this->db->select('*, count(id) as total')
+		$this->db->select('*')
 			->from($this->details)
 			->limit($limit,$offset)
 			->order_by($ord,$dir);
 		
 		// set the date range
-		($from!==false) ? $this->db->where('event_date >', $id) : null;
-		($till!==false) ? $this->db->where('event_date <', $till) : null;
+		($from!==null) ? $this->db->where('event_date >', $from) : null;
+		($till!==null) ? $this->db->where('event_date <', $till) : null;
 		
 		// get my events
 		return $this->db->get();
+	}
+	
+	function set_event($id,$field,$value){
+		if($this->db->where('id',$id)->set($field,$value)->update($this->details)) return true;
+		return false;
 	}
 	
 	

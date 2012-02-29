@@ -43,10 +43,9 @@ class Admin extends Admin_Controller {
 	
 	
 	function index(){
-	
-		$data["eventData"] = $this->event_model->ManageEvents();
+		$data["events"] = $this->event_model->get_events(null,null,'event_date','DESC')->result();
 		$this->template
-			->append_metadata( css('event.css', $this->config->item('module_name')))
+			->append_metadata(css('event.css', $this->config->item('module_name')))
 			->build('admin/main', $data);
 	}
 	
@@ -223,12 +222,12 @@ class Admin extends Admin_Controller {
 		redirect(site_url('admin/' . $this->config->item('module_name')));
 	}
 	
-	function update_status( $encrypted_event_id ){
-		if($this->user_id!="")
-		{
-			$event_id = WsDecrypt( $encrypted_event_id );
-			$this->event_model->UpdateEventStatus( $event_id );
-			redirect(site_url('admin/' . $this->config->item('module_name')));
+	function set_status($id=null,$status='active'){
+		if($id!=null){			
+			$this->event_model->set_event($id,'status',$status);
+			redirect($_SERVER['HTTP_REFERER']);
 		}
+
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 }
