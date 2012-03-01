@@ -84,8 +84,8 @@ class event_model extends CI_Model {
 			->order_by($ord,$dir);
 		
 		// set the date range
-		($from!==null) ? $this->db->where('event_date >', $from) : null;
-		($till!==null) ? $this->db->where('event_date <', $till) : null;
+		($from!==null) ? $this->db->where('event_date >=', $from) : null;
+		($till!==null) ? $this->db->where('event_date <=', $till) : null;
 		
 		// get my events
 		return $this->db->get();

@@ -20,7 +20,7 @@ class Event extends Public_Controller
 	}
 	
 	public function agenda(){
-		$events = (array)$this->event_model->get_events(now(),null,'event_date','DESC')->result();
+		$events = (array)$this->event_model->get_events(date('Y-m-d',now()),null,'event_date','ASC')->result();
 		foreach($events as $event){
 			$event->sponsors = (array)$this->event_model->get_sponsors($event->id)->result();
 			$event->links = (array)$this->event_model->get_links($event->id)->result();
@@ -88,8 +88,8 @@ class Event extends Public_Controller
 	}
 	
 	public function get_agenda($date){
+		$events = (array)$this->event_model->get_events(date("Y-m-d", strtotime($date)),date("Y-m-d", strtotime($date)),'event_date','DESC')->result();
 		
-		$events = (array)$this->event_model->get_events(now(),null,'event_date','DESC')->result();
 		foreach($events as $event){
 			$event->sponsors = (array)$this->event_model->get_sponsors($event->id)->result();
 			$event->links = (array)$this->event_model->get_links($event->id)->result();
@@ -97,7 +97,6 @@ class Event extends Public_Controller
 		};
 		
 		($this->input->is_ajax_request()) ? $this->load->view($this->config->item('module_name') . '/details', $data) : $this->template->build($this->config->item('module_name') . '/details', $data);
-		
 	}
 	
 	public function details($id){
