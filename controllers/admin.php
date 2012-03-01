@@ -30,12 +30,12 @@ class Admin extends Admin_Controller {
 		$user = $this->ion_auth->get_user();
 		
 		if(!empty($user)){
-			$this->user_id = $user->id;	
+			$this->user_id = $user->id;
 			$this->config->set_item('user_id', $this->user_id );
 		}
 		
 		// global clientside includes
-		$this->template->append_metadata( css('admin.css', $this->config->item('module_name')) );
+		$this->template->append_metadata(css('admin.css', $this->config->item('module_name')));
 		
 		// no soup for you!
 		( $this->user_id != "" ) ? $this->template->build('admin/access_failed') : null;
@@ -55,11 +55,9 @@ class Admin extends Admin_Controller {
 		$data['links'] = array();
 		$this->template
 			->append_metadata( css('event.css', $this->config->item('module_name')) )
-			->append_metadata( css('jquery-ui-1.8.17.custom/ui-darkness/jquery-ui-1.8.17.custom.css', $this->config->item('module_name')) )
-			->append_metadata( css('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.css', $this->config->item('module_name')) )
+			->append_metadata( css('jquery-ui-1.8.18.custom.css', $this->config->item('module_name')) )
 			
-			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('module_name')) )
-			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.js', $this->config->item('module_name')) )
+			->append_metadata( js('jquery-ui-1.8.18.custom.min.js', $this->config->item('module_name')) )
 			->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
 			->append_metadata( js('form.js', $this->config->item('module_name')) )
 			
@@ -129,7 +127,7 @@ class Admin extends Admin_Controller {
 					$this->event_model->delete_sponsor($sponsor['id']);
 					continue;
 				}
-				($sponsor['text']!='') ? $this->event_model->update_sponsor($sponsor) : null;
+				($sponsor['name']!='') ? $this->event_model->update_sponsor($sponsor) : null;
 			}
 		}
 		
@@ -156,11 +154,9 @@ class Admin extends Admin_Controller {
 		
 		$this->template
 			->append_metadata( css('event.css', $this->config->item('module_name')) )
-			->append_metadata( css('jquery-ui-1.8.17.custom/ui-darkness/jquery-ui-1.8.17.custom.css', $this->config->item('module_name')) )
-			->append_metadata( css('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.css', $this->config->item('module_name')) )
+			->append_metadata( css('jquery-ui-1.8.18.custom.css', $this->config->item('module_name')) )
 			
-			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-1.8.17.custom.min.js', $this->config->item('module_name')) )
-			->append_metadata( js('jquery-ui-1.8.17.custom/jquery-ui-timepicker-addon.js', $this->config->item('module_name')) )
+			->append_metadata( js('jquery-ui-1.8.18.custom.min.js', $this->config->item('module_name')) )
 			->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
 			->append_metadata( js('form.js', $this->config->item('module_name')) )
 			

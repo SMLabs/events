@@ -5,4 +5,4 @@
 	</div>
 </h1>
 
-<?=$this->load->view($this->config->item('module_name').'/details', array("events"=>$eventData),true);?>
+<?=$this->load->view($this->config->item('module_name').'/details', array("events"=>$events),true);?>

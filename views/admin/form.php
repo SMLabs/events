@@ -33,12 +33,12 @@
 				
 				<li>
 					<label for="start_time">Start Time <small>The time at which your event begins.</small></label>
-					<div class="input type-text"><input type="text" id="start_time" name="start_time" value="<?=isset($event)?Time24hFormat_Into_AMPMTime($event->start_time):null?>" /></div>     
+					<div class="input type-text"><input class="auto-select" type="text" id="start_time" name="start_time" value="<?=isset($event)?Time24hFormat_Into_AMPMTime($event->start_time):null?>" /></div>     
 				</li>
 
 				<li>
 					<label for="end_time">End Time <small>The time at which your event ends and people should start leaving.</small></label>
-					<div class="input type-text"><input type="text" id="end_time" name="end_time" value="<?=isset($event)?Time24hFormat_Into_AMPMTime($event->end_time):null?>" /></div>
+					<div class="input type-text"><input class="auto-select" type="text" id="end_time" name="end_time" value="<?=isset($event)?Time24hFormat_Into_AMPMTime($event->end_time):null?>" /></div>
 				</li>
 			</ul>
 		</div>
@@ -127,6 +127,7 @@
 									'eventbrite' => 'Eventbrite',
 									'mailchimp' => 'Mail Chimp',
 									'googleplus' => 'Google+',
+									'youtube' => 'Youtube',
 									'twitter' => 'Twitter',
 									'pdf' => 'PDF Downlaod',
 									'svpply' => 'Svpply',

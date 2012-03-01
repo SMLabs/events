@@ -29,7 +29,7 @@
 	?>
 	    <tr class="<?=$event->status?>">
 	        <td><?php echo WsStringFormat($event->name,0,20); ?></td>
-	        <td align="center"><a class="tip" href="javascript:void(0)" title="<?=$event->description?>"><?php echo WsStringFormat($event->description,0,20);?></a></td>
+	        <td align="center"><a class="tip" href="javascript:void(0)" title="<?=$event->description?>"><?php echo WsStringFormat(strip_tags($event->description),0,140);?></a></td>
 	        <td align="center"><?php echo Date_24hFormat_Into_SlashFormat($event->event_date) ;?></td>
 	        <td align="center"><?php echo Time24hFormat_Into_AMPMTime($event->start_time) ;?></td>
 	        <td align="center"><?php echo Time24hFormat_Into_AMPMTime($event->end_time) ;?></td>

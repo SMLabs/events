@@ -12,24 +12,39 @@
 							<div class="agenda-time"><?=Time24hFormat_Into_AMPMTime($event->start_time)?> - <?= Time24hFormat_Into_AMPMTime($event->end_time)?></div>
 						</div>
 					</div>
-						
+					
 					<article class="agenda-details">
 						<header><h2 class="agenda-header"><?=$event->name?> </h2></header>
 						<p><?=$event->description ?></p>
 						
-					<?php if($event->sponsors!=''):?>
-						<div class="agenda-spon-heading">Sponsors</div>
-						<div class="agenda-spon-list"><?=$event->sponsors?></div>
-					<?php endif;?>
-
-					<?php if($event->eventbrite_event_url!='' OR $event->facebook_event_url!=''):?>
-						<div class="agenda-view-heading">View Event:</div>
-						<div class="agenda-view-buttons">
-							<?php if($event->eventbrite_event_url!=''):?><a href="<?=CheckHTTP_InURL($event->eventbrite_event_url)?>"><div class="orange_btn">Eventbrite</div></a><?php endif;?>
-							<?php if($event->facebook_event_url!=''):?><a href="<?=CheckHTTP_InURL($event->facebook_event_url)?>"><div class="facebook_btn">facebook</div></a><?php endif;?>
+	<?php if(count($event->sponsors) > 0):?>
+						<div class="agenda-section agenda-sponsors">
+							<div class="agenda-spon-heading">Sponsors</div>
+							<ul class="agenda-spon-list">
+			<?php foreach($event->sponsors as $sponsor):?>
+								<li>
+									<?php if($sponsor->url!=''):?>
+										<a href="<?=$sponsor->url?>" target="_blank"><span><?=$sponsor->name?></span></a>
+									<?php else:?>
+										<a><span><?=$sponsor->name?></span></a>								
+									<?php endif;?>
+								</li>
+			<?php endforeach;?>
+							</ul>
 						</div>
-					<?php endif;?>
-					
+	<?php endif;?>
+	
+	<?php if(count($event->links) > 0):?>
+						<div class="agenda-section agenda-links">
+							<div class="agenda-view-heading">Event Links:</div>
+							<div class="agenda-view-buttons">
+		<?php foreach($event->links as $link):?>
+								<a class="agenda-event-link <?=$link->type?>" href="<?=$link->url?>" target="_blank"><span><?=$link->text?></span></a>
+		<?php endforeach;?>
+							</div>
+						</div>
+	<?php endif;?>
+						
 					</article>
             	</div>
 <?php endforeach;?>

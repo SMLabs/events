@@ -59,3 +59,7 @@ div.floating-footer{
 tr.deleted td{
 	background:#FCC;
 }
+
+td.actions{
+	width:225px;
+}

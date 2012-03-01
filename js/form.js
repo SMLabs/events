@@ -2,27 +2,22 @@
 	
 	// Date Picker Stuff
 	jQuery('#event_date').datepicker();
-	jQuery('#start_time').timepicker({
-		hourGrid: 4,
-		minuteGrid: 10,		
-		ampm: true
-	});
-	jQuery('#end_time').timepicker({
-		hourGrid: 4,
-		minuteGrid: 10,		
-		ampm: true
-	});
-
-	 jQuery("#frmCreate").validate();
+	
+	// validation
+	jQuery("#frmCreate").validate();
 
 	// testlink
 	$('tbody .testlink').live('click',function(e){
 		e.preventDefault();
 		$.colorbox({html:'<iframe src="'+$(this).prev().val()+'" style="width:900px;height:450px;"></iframe>'});
 	});
-
+	
+	//
+	//
 	// Sponsors
-
+	//
+	//
+	
 	// Delete
 	$('tbody.sponsors .delete').live('click',function(e){
 		e.preventDefault();
@@ -32,7 +27,7 @@
 			$(this).removeClass('red');
 			$(this).addClass('gray');
 			$(this).find('span').text('Undelete');
-			item.find('td.actions input[name*="[delete]"]').val(1);
+			item.find('input[name*="[delete]"]').val(1);
 		}else{
 			item.removeClass('deleted');
 			$(this).removeClass('gray');
@@ -58,9 +53,14 @@
 			</td>\
 		</tr>').appendTo($('tbody.sponsors'));
 	});
-
+	
+	
+	//
+	//
 	// Links
-
+	//
+	//
+	
 	// Delete
 	$('tbody.links .delete').live('click',function(e){
 		e.preventDefault();
@@ -70,13 +70,13 @@
 			$(this).removeClass('red');
 			$(this).addClass('gray');
 			$(this).find('span').text('Undelete');
-			item.find('div.actions input[name="delete"]').val('true');
+			item.find('input[name*="[delete]"]').val(1);
 		}else{
 			item.removeClass('deleted');
 			$(this).removeClass('gray');
 			$(this).addClass('red');
 			$(this).find('span').text('Delete');
-			item.find('div.actions input[name="delete"]').val('false');
+			item.find('input[name*="[delete]"]').val(0);
 		}
 	});
 
@@ -101,6 +101,7 @@
 						<option value="eventbrite">Eventbrite</option>\
 						<option value="mailchimp">Mail Chimp</option>\
 						<option value="googleplus">Google+</option>\
+						<option value="youtube">Youtube+</option>\
 						<option value="twitter">Twitter</option>\
 						<option value="pdf">PDF Downlaod</option>\
 						<option value="svpply">Svpply</option>\

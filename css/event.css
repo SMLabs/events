@@ -243,8 +243,7 @@ div.day-number{
 	text-align:left;
 	top:46px;
 	font-weight:normal;	
-	cursor:pointer;
-	
+	cursor:pointer;	
 }
 
 .detail_open_arrow {
@@ -254,4 +253,78 @@ div.day-number{
     position: relative;
     top: 52px;
     width: 14px;
+}
+
+
+
+
+/* link types */
+
+a.agenda-event-link {
+	padding:6px 15px 6px 35px;
+	border:1px solid #dbeaf3;
+	background: #FFF url(../img/enable_bullet.jpg) 8px center  no-repeat;
+	color:#3A7EB7;
+	font-weight:600;
+	font-size:11pt;
+	float:left;
+	margin:0px 2px
+}
+
+a.agenda-event-link:hover {}
+
+a.agenda-event-link.default {}
+
+a.agenda-event-link.facebook {
+	border:1px solid #3C5A98;
+	background: #FFF url(../img/btn_icon_facebook.png) 8px center  no-repeat;
+	color:#3C5A98;
+}
+
+a.agenda-event-link.eventbrite {
+	border:1px solid #fb4f18;
+	background: #FFF url(../img/btn_icon_eventbrite.png) 8px center  no-repeat;
+	color:#fb4f18;
+}
+
+a.agenda-event-link.googleplus {
+	border:1px solid #999999;
+	background: #FFF url(../img/btn_icon_googleplus.png) 8px center  no-repeat;
+	color:#999999;
+}
+
+a.agenda-event-link.youtube {
+	border:1px solid #f00;
+	background: #FFF url(../img/btn_icon_youtube.png) 8px center  no-repeat;
+	color:#f00;
+}
+
+a.agenda-event-link.mailchimp {
+	border:1px solid #fb4f18;
+	background: #FFF url(../img/btn_icon_mailchimp.png) 8px center  no-repeat;
+	color:#fb4f18;
+}
+
+a.agenda-event-link.pintrest {
+	border:1px solid #fb4f18;
+	background: #FFF url(../img/btn_icon_pintrest.png) 8px center  no-repeat;
+	color:#fb4f18;
+}
+
+a.agenda-event-link.pdf {
+	border:1px solid #fb4f18;
+	background: #FFF url(../img/btn_icon_pdf.png) 8px center  no-repeat;
+	color:#fb4f18;
+}
+
+a.agenda-event-link.gowalla {
+	border:1px solid #fb4f18;
+	background: #FFF url(../img/btn_icon_gowalla.png) 8px center  no-repeat;
+	color:#fb4f18;
+}
+
+a.agenda-event-link.foursquare {
+	border:1px solid #fb4f18;
+	background: #FFF url(../img/btn_icon_foursquare.png) 8px center  no-repeat;
+	color:#fb4f18;
 }

@@ -79,6 +79,7 @@ class event_model extends CI_Model {
 		// select my events
 		$this->db->select('*')
 			->from($this->details)
+			->where(array('status'=>'active'))
 			->limit($limit,$offset)
 			->order_by($ord,$dir);
 		

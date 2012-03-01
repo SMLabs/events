@@ -91,7 +91,7 @@ class Module_Event extends Module {
 				`event_id` BIGINT(20) NOT NULL,
 				`url` VARCHAR(255) NOT NULL DEFAULT '',
 				`text` VARCHAR(255) NOT NULL DEFAULT '',
-				`type` ENUM('default','facebook','eventbrite','mailchimp','googleplus','twitter','pinterest','pdf','svpply','yelp','foursquare','gowalla') NOT NULL DEFAULT 'default',
+				`type` ENUM('default','facebook','eventbrite','mailchimp','googleplus','youtube','twitter','pinterest','pdf','svpply','yelp','foursquare','gowalla') NOT NULL DEFAULT 'default',
 				`order` tinyint(5) NOT NULL,
 				`created_on` TIMESTAMP NOT NULL,
 				`modified_on` DATE NULL,
