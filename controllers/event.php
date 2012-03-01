@@ -101,7 +101,7 @@ class Event extends Public_Controller
 	
 	public function details($id){
 		
-		$data['events'] =  $this->event_model->GetEvent_ById($id);
+		$data['events'] =  $this->event_model->get_event($id);
 	
 		($this->input->is_ajax_request()) ? $this->load->view($this->config->item('module_name') . '/details', $data) : $this->template->build($this->config->item('module_name') . '/details', $data);
 	}
