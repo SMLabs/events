@@ -36,9 +36,6 @@ class Plugin_Event extends Plugin
 				'timestamp'=>strtotime($row['event_date']),
 				'date'=>$row['event_date'],
 				'description'=>$row['description'],
-				'sponsors'=>$row['sponsors'],
-				'facebook'=>$row['facebook_event_url'],
-				'eventbrite'=>$row['eventbrite_event_url'],
 				'starttime'=>$row['start_time'],
 				'endtime'=>$row['end_time']
 			);
