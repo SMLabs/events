@@ -43,7 +43,7 @@ class Admin extends Admin_Controller {
 	
 	
 	function index(){
-		$data["events"] = $this->event_model->get_events(null,null,'event_date','DESC')->result();
+		$data["events"] = $this->event_model->get_events(null,null,'event_date','DESC',null)->result();
 		$this->template
 			->append_metadata(css('event.css', $this->config->item('module_name')))
 			->build('admin/main', $data);

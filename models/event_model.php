@@ -74,13 +74,15 @@ class event_model extends CI_Model {
 	}
 	
 	
-	function get_events($from=null,$till=null,$ord="event_date",$dir="ASC",$offset='0',$limit="9999")
+	function get_events($from=null,$till=null,$ord="event_date",$dir="ASC",$active=true,$offset='0',$limit="9999")
 	{
 		// select my events
 		$this->db->select('*')
-			->from($this->details)
-			->where(array('status'=>'active'))
-			->limit($limit,$offset)
+			->from($this->details);
+			
+		($active!=null) ? $this->db->where(array('status'=>($active)?'active':'inactive')):null;
+			
+		$this->db->limit($limit,$offset)
 			->order_by($ord,$dir);
 		
 		// set the date range
