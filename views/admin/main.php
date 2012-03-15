@@ -16,8 +16,8 @@
 <section class="item">
 	<table>
 	    <tr>
-	        <th>Name of Event</th>
-	        <th>Description</th>
+	        <th>#ID</th>
+	        <th>Name</th>
 	        <th>Date</th>
 	        <th>Start Time</th>
 	        <th>End Time</th>
@@ -28,8 +28,8 @@
 	    foreach( $events as $keys => $event ) {
 	?>
 	    <tr class="<?=$event->status?>">
-	        <td><?php echo WsStringFormat($event->name,0,20); ?></td>
-	        <td align="center"><a class="tip" href="javascript:void(0)" title="<?=$event->description?>"><?php echo WsStringFormat(strip_tags($event->description),0,140);?></a></td>
+	        <td><?=$event->id ?></td>
+	        <td><a href='<?=site_url($this->module.'/details/'.$event->id)?>' target="_blank"><?=$event->name?></a></td>
 	        <td align="center"><?php echo Date_24hFormat_Into_SlashFormat($event->event_date) ;?></td>
 	        <td align="center"><?php echo Time24hFormat_Into_AMPMTime($event->start_time) ;?></td>
 	        <td align="center"><?php echo Time24hFormat_Into_AMPMTime($event->end_time) ;?></td>
