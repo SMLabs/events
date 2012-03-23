@@ -35,7 +35,7 @@ class Admin extends Admin_Controller {
 		}
 		
 		// global clientside includes
-		$this->template->append_metadata(css('admin.css', $this->config->item('module_name')));
+		$this->template->append_metadata(css('admin.css', $this->module));
 		
 		// no soup for you!
 		( $this->user_id != "" ) ? $this->template->build('admin/access_failed') : null;
@@ -43,9 +43,16 @@ class Admin extends Admin_Controller {
 	
 	
 	function index(){
-		$data["events"] = $this->event_model->get_events(null,null,'event_date','DESC',null)->result();
+		$data["events"] = $this->event_model->get_events(date('Y-m-d',strtotime('today')),null,'event_date','DESC',null)->result();
+		
+		$data["pastevents"] = $this->event_model->get_events(null,date('Y-m-d',strtotime('today')),'event_date','DESC',null)->result();
+		
+		$data["fbevents"] = $this->event_model->get_fbevents(date('Y-m-d',strtotime('today')),null,'status','DESC',null)->result();
+		
+		$data["fbpastevents"] = $this->event_model->get_fbevents(null,date('Y-m-d',strtotime('today')),'status','DESC',null)->result();
+		
 		$this->template
-			->append_metadata(css('event.css', $this->config->item('module_name')))
+			->append_metadata(css('event.css', $this->module))
 			->build('admin/main', $data);
 	}
 	
@@ -54,12 +61,13 @@ class Admin extends Admin_Controller {
 		$data['sponsors'] = array();
 		$data['links'] = array();
 		$this->template
-			->append_metadata( css('event.css', $this->config->item('module_name')) )
-			->append_metadata( css('jquery-ui-1.8.18.custom.css', $this->config->item('module_name')) )
+			->append_metadata( css('event.css', $this->module) )
+			->append_metadata( css('jquery-ui-1.8.18.custom.css', $this->module) )
 			
-			->append_metadata( js('jquery-ui-1.8.18.custom.min.js', $this->config->item('module_name')) )
-			->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
-			->append_metadata( js('form.js', $this->config->item('module_name')) )
+			->append_metadata( js('jquery-ui-1.8.18.custom.min.js', $this->module) )
+			->append_metadata( js('jquery.validate.js', $this->module) )
+			->append_metadata( js('form.js', $this->module) )
+			->append_metadata( js('facebook.js', $this->module) )
 			
 			->append_metadata( $this->load->view('fragments/wysiwyg', $this->data, TRUE) )
 			
@@ -142,7 +150,7 @@ class Admin extends Admin_Controller {
 		}
 		
 		// send user to edit page
-		redirect(site_url('admin/' . $this->config->item('module_name')).'/edit/'.$event_id);
+		redirect(site_url('admin/' . $this->module).'/edit/'.$event_id);
 	}
 	
 	
@@ -153,12 +161,12 @@ class Admin extends Admin_Controller {
 		$data['links'] = (array)$this->event_model->get_links($event_id)->result();
 		
 		$this->template
-			->append_metadata( css('event.css', $this->config->item('module_name')) )
-			->append_metadata( css('jquery-ui-1.8.18.custom.css', $this->config->item('module_name')) )
+			->append_metadata( css('event.css', $this->module) )
+			->append_metadata( css('jquery-ui-1.8.18.custom.css', $this->module) )
 			
-			->append_metadata( js('jquery-ui-1.8.18.custom.min.js', $this->config->item('module_name')) )
-			->append_metadata( js('jquery.validate.js', $this->config->item('module_name')) )
-			->append_metadata( js('form.js', $this->config->item('module_name')) )
+			->append_metadata( js('jquery-ui-1.8.18.custom.min.js', $this->module) )
+			->append_metadata( js('jquery.validate.js', $this->module) )
+			->append_metadata( js('form.js', $this->module) )
 			
 			->append_metadata( $this->load->view('fragments/wysiwyg', $this->data, TRUE) )
 			
@@ -210,12 +218,12 @@ class Admin extends Admin_Controller {
 		$this->event_model->insert_link($inserts,true);
 		
 		// send user to edit page
-		redirect(site_url('admin/' . $this->config->item('module_name')).'/edit/'.$event_id);
+		redirect(site_url('admin/' . $this->module).'/edit/'.$event_id);
 	}
 	
 	function delete( $event_id ){
 		$this->event_model->delete_event( $event_id );
-		redirect(site_url('admin/' . $this->config->item('module_name')));
+		redirect(site_url('admin/' . $this->module));
 	}
 	
 	function set_status($id=null,$status='active'){

@@ -44,7 +44,7 @@ class event_model extends CI_Model {
 		$this->db->update($this->details);
 		
 		
-		return true;	
+		return true;
 	}
 
 	function delete_event($event_id)
@@ -66,13 +66,22 @@ class event_model extends CI_Model {
 	
 	function get_event($event_id)
 	{
-		$this->db->select('*');
-		$this->db->from($this->details);
-		$this->db->where('id', $event_id);
+		$this->db->select('*')
+			->from($this->details)
+			->where('id', $event_id);
 		
 		return $this->db->get();
 	}
 	
+	function get_fbevent($fbpage_id)
+	{
+		
+		$this->db->select('*')
+			->from($this->details)
+			->where('fbpage_id', $fbpage_id);
+		
+		return $this->db->get();
+	}
 	
 	function get_events($from=null,$till=null,$ord="event_date",$dir="ASC",$active=true,$offset='0',$limit="9999")
 	{
@@ -93,8 +102,22 @@ class event_model extends CI_Model {
 		return $this->db->get();
 	}
 	
+	function get_fbevents($from=null,$till=null,$ord="event_date",$dir="ASC",$active=true,$offset='0',$limit="9999")
+	{
+		// select my events
+		$this->db->where('fbpage_id !=','');
+		
+		// get my events
+		return $this->get_events($from,$till,$ord,$dir,$active,$offset,$limit);
+	}
+	
 	function set_event($id,$field,$value){
 		if($this->db->where('id',$id)->set($field,$value)->update($this->details)) return true;
+		return false;
+	}
+	
+	function set_fbevent($fbpage_id,$field,$value){
+		if($this->db->where('fbpage_id',$fbpage_id)->set($field,$value)->update($this->details)) return true;
 		return false;
 	}
 	

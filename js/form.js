@@ -52,6 +52,7 @@
 				<button class="btn red delete"><span>Delete</span></button>\
 			</td>\
 		</tr>').appendTo($('tbody.sponsors'));
+		sizeChangeCallback();
 	});
 	
 	
@@ -95,7 +96,7 @@
 			</td>\
 			<td class="type">\
 				<div class="input type-select">\
-					<select name="newlinks['+index+'][type]" class="chzn">\
+					<select name="newlinks['+index+'][type]">\
 						<option value="default" selected="selected">Normal Link</option>\
 						<option value="facebook">Facebook</option>\
 						<option value="eventbrite">Eventbrite</option>\
@@ -117,6 +118,7 @@
 				<button class="btn red delete"><span>Delete</span></button>\
 			</td>\
 		</tr>').appendTo($('tbody.links'));
+		sizeChangeCallback();
 	});
 
 });})(jQuery);
